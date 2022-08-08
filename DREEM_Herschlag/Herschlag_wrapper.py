@@ -2,42 +2,13 @@
 # # USER EDIT PARAMETERS HERE
 ####################################################################
 
-PATH_TO_DATA = 'test/resources/'
-SAMPLES_TO_PROCESS = ['case_1','case_2']
-dreem_args = {
-    '--overwrite':True,
-    '--RNAstructure_path':'/Users/ymdt/src/RNAstructure/exe',
-    '--sample_info':PATH_TO_DATA+'samples.csv',
-    '--temperature':False,
-    '--add_any_info':False,
-    '--bootstrap':True
-}
-VERBOSE = True
+
 ####################################################################
 
 
 ## SANITY CHECKS
 ####################################################################
 
-import pandas as pd
-import os
-
-#Define constants
-FILES_PER_SAMPLE = ['r1.fastq','r2.fastq','ref.fasta','library.csv']
-
-# check that every file is there
-for s in SAMPLES_TO_PROCESS:
-    for f in FILES_PER_SAMPLE:
-        assert os.path.exists(PATH_TO_DATA+s+'/'+f), f"{PATH_TO_DATA}{s}/{f} doesn't exist"
-assert os.path.exists(PATH_TO_DATA+'samples.csv'), f"{PATH_TO_DATA}samples.csv doesn't exist"
-
-# check the sanity of samples.csv
-df_samples = pd.read_csv('test/resources/samples.csv')
-assert len(df_samples['sample']) == len(df_samples['sample'].unique()), "Every line isn't unique in samples.csv"
-
-# check that every sample as a corresponding line of samples.csv
-for s in SAMPLES_TO_PROCESS:
-    assert s in list(df_samples['sample']), f"{s} doesn't have a corresponding line in samples.csv"
 
 
 ## RUN 
