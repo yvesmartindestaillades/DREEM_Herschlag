@@ -1,0 +1,6 @@
+mandatory:
+  - name
+  - flank
+optional:
+  - ROI_start
+  - ROI_stop

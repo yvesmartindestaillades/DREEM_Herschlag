@@ -1,0 +1,1 @@
+{"buildTargets":["build-image","default","init","pin-dependencies","push-image","push_to_pypi","upgrade-dependencies"],"launchTargets":[],"customConfigurationProvider":{"workspaceBrowse":{"browsePath":[],"compilerArgs":[]},"fileIndex":[]}}
