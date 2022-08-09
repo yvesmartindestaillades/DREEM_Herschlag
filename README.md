@@ -45,14 +45,16 @@ Your fasta/fastq files organization should look like this:
 
 To add additional experimental information to DREEM's output, you can to create two different types of files, samples.csv and library.csv.
 
+Generate templates for `samples.csv` and `library.csv` by running:
+
+```
+dreem_herschlag --generate_templates
+```
+
+
 `samples.csv` contains information about the sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
 The `sample` column of `samples.csv` must match the `your_sample_#` folders names shown above.
-A template for `samples.csv` can be found at the root of this repo #TODO or by typing this command:
-
-```
-dreem_herschlag --samples_template
-```
 
 Columns description for `samples.csv` can be found by typing:
 
@@ -60,14 +62,11 @@ Columns description for `samples.csv` can be found by typing:
 dreem_herschlag --sample_info
 ```
 
+> __*NOTE:*__ `exp_env` must be `in_vivo` or `in_vitro`
+
 `library.csv` contains information about each construct in a sample.
 There must be one `library.csv` file per sample.
 The `name` column of `library.csv` should match the constructs name of the fasta file.
-A template for `library.csv` can be found at the root of this repo #TODO or by typing this command:
-
-```
-dreem_herschlag --library_template
-```
 
 Columns description for `library.csv` can be found by typing:
 

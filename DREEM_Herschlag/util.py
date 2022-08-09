@@ -1,7 +1,7 @@
 
 from DREEM_Herschlag.resources import __file__ as resources_file
 from DREEM_Herschlag import __file__ as DREEM_Herschlag_file
-
+import yaml
 
 class Path(object):
     def __init__(self) -> None:    
@@ -10,17 +10,25 @@ class Path(object):
         self.sample_attribute_path = self.resources_file+'/sample_attributes.yml'
         self.library_attributes_path = self.resources_file+'/library_attributes.yml'
 
-def get_attributes(file):
+def get_attributes(file, type='txt'):
     path = Path()
+
+    def open_fun(f,type):
+        if type == 'txt':
+            return f.read()
+        if type == 'yml':
+            return yaml.safe_load(f)
+
     if file == 'samples.csv':
         with open(path.sample_attribute_path, 'r') as f:
-            attributes = f.read()
+            attributes = open_fun(f,type)
         f.close()
 
     if file == 'library.csv':
         with open(path.library_attributes_path, 'r') as f:
-            attributes = f.read()
+            attributes = open_fun(f,type)
         f.close()
+
     return attributes
 
 def echo_attributes(file):
@@ -32,3 +40,28 @@ def echo_attributes_samples():
 
 def echo_attributes_library():
     echo_attributes('library.csv')
+
+def _write_cols_to_csv(file,all_cols):
+    chain = ''
+    for col in all_cols:
+        chain = chain+ col+','
+    with open(file,'w') as f:
+        f.write(chain[:-1]+'\n'*3)
+        f.close()
+
+def generate_template_samples(exp_env):
+    attributes = get_attributes('samples.csv','yml')
+    assert exp_env in ['in_vivo','in_vitro'], "exp_env must be 'in_vivo' or 'in_vitro'"
+    all_cols = [attributes[a][b] for a in ['mandatory','optional'] for b in ['all',exp_env]][:-1]
+    all_cols = [item for sublist in all_cols for item in sublist if item is not None]
+    _write_cols_to_csv(f"template_samples_{exp_env}.csv",all_cols)
+
+def generate_template_library():
+    attributes = get_attributes('library.csv','yml')
+    all_cols = attributes['mandatory']+attributes['optional']
+    _write_cols_to_csv(f"template_library.csv",all_cols)
+
+def generate_templates():
+    generate_template_samples('in_vivo')
+    generate_template_samples('in_vitro')
+    generate_template_library()

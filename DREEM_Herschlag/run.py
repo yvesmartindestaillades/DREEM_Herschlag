@@ -5,7 +5,7 @@ from DREEM_Herschlag.sanity_check import Sanity_check
 from DREEM_Herschlag.run_dreem import Run_dreem
 import os
 
-from DREEM_Herschlag.util import echo_attributes_library, echo_attributes_samples
+from DREEM_Herschlag.util import echo_attributes_samples, echo_attributes_library, generate_templates
 
 @click.command()
 @optgroup.group("main arguments")
@@ -14,6 +14,7 @@ from DREEM_Herschlag.util import echo_attributes_library, echo_attributes_sample
 
 @optgroup.option("--samples_info", is_flag=True, help="Print the mandatory and optional columns for samples.csv")
 @optgroup.option("--library_info", is_flag=True, help="Print the mandatory and optional columns for library.csv")
+@optgroup.option("--generate_templates", is_flag=True, help="Generate templates for samples.csv (in_vivo and in_vitro) and library.csv")
 
 def main(**args):
     """
@@ -27,9 +28,11 @@ def main(**args):
 def run(args):
     if args['samples_info']:
         echo_attributes_samples()
-        exit()
     if args['library_info']:
         echo_attributes_library()
+    if args['generate_templates']:
+        generate_templates()
+    if args['samples_info'] or args['library_info'] or args['generate_templates']:
         exit()
     else:
         with open(args['config'], 'r') as f:
