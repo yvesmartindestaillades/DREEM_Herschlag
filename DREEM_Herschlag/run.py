@@ -12,8 +12,8 @@ from DREEM_Herschlag.util import echo_attributes_library, echo_attributes_sample
 @optgroup.option("-c", "--config", type=click.Path(exists=True),
                  help="reference sequences in fasta format")
 
-@optgroup.option("--print_sample","--print_samples", is_flag=True, help="Print the mandatory and optional columns for samples.csv")
-@optgroup.option("--print_library","--print_libraries", is_flag=True, help="Print the mandatory and optional columns for library.csv")
+@optgroup.option("--samples_info", is_flag=True, help="Print the mandatory and optional columns for samples.csv")
+@optgroup.option("--library_info", is_flag=True, help="Print the mandatory and optional columns for library.csv")
 
 def main(**args):
     """
@@ -25,10 +25,10 @@ def main(**args):
 
 
 def run(args):
-    if args['print_sample']:
+    if args['samples_info']:
         echo_attributes_samples()
         exit()
-    if args['print_library']:
+    if args['library_info']:
         echo_attributes_library()
         exit()
     else:
