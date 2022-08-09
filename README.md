@@ -24,22 +24,9 @@ make init
 
 ## Run DREEM
 
-### Write additional experimental information files 
-
-To add additional experimental information to DREEM's output, you will have to fill in two different types of files, samples.csv and library.csv.
-
-`samples.csv` contains information about the sample as a whole, such as the temperature or the date. 
-Each row of `samples.csv` correspond to a single sample. 
-The `sample` column of `samples.csv` must match the folders names.
-
-Columns description for `samples.csv` can be found by typing:
-
-```
-dreem_herschlag --print_sample
-```
-
 ### Organize your sequencing files
 Your fasta/fastq files organization should look like this:
+
 ```
 |- /[path_to_data]
      |- samples.csv
@@ -53,11 +40,43 @@ Your fasta/fastq files organization should look like this:
      |- /[your_sample_3]
           |- ...
 ```
-Don't forget to include `samples.csv` at the root of `path_to_data` and library.csv in each sample folder.
+
+### Write additional experimental information files (optional)
+
+To add additional experimental information to DREEM's output, you can to create two different types of files, samples.csv and library.csv.
+
+`samples.csv` contains information about the sample as a whole, such as the temperature or the date. 
+Each row of `samples.csv` correspond to a single sample. 
+The `sample` column of `samples.csv` must match the `your_sample_#` folders names shown above.
+A template for `samples.csv` can be found by typing this command:
+
+```
+dreem_herschlag --samples_template
+```
+
+Columns description for `samples.csv` can be found by typing:
+
+```
+dreem_herschlag --sample_info
+```
+
+`library.csv` contains information about each construct in a sample.
+There must be one `library.csv` file per sample.
+The `name` column of `library.csv` should match the constructs name of the fasta file.
+A template for `library.csv` can be found by typing this command:
+
+```
+dreem_herschlag --library_template
+```
+
+Columns description for `library.csv` can be found by typing:
+
+```
+dreem_herschlag --library_info
+```
 
 ### Fill in config.yml
 
 - Download the `config-template.yml` template at the root of this repo.
 - Follow the instructions to fill the template.
-
-> **_NOTE:_** your folders and fasta/fastq files must have specific names and be in 
+- 
