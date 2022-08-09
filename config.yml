@@ -2,7 +2,7 @@
 path_to_data: /Users/ymdt/src/dreem/test/resources/
 samples:
   - case_1
-  - case_2
+ # - case_2
 
 sample_file: /Users/ymdt/src/dreem/test/resources/samples.csv
 

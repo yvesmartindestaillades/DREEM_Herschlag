@@ -21,3 +21,20 @@ __pycache__
 *.egg-info
 
 
+# ignore log
+log
+
+# Ignore .gitignore
+.gitignore
+
+# ignore .git directory
+.git
+
+# ignore input
+input
+
+# ingore output
+output
+
+# ignore temp
+temp

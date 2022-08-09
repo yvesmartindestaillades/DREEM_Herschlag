@@ -29,8 +29,8 @@ setup(
    packages=['DREEM_Herschlag'],  #same as name
    package_dir={'DREEM_Herschlag': 'DREEM_Herschlag'},
    py_modules=[
-       'DREEM_Herschlag/samples',
-       'DREEM_Herschlag/constructs',
+       'DREEM_Herschlag/sanity_check',
+       'DREEM_Herschlag/run_dreem',
        'DREEM_Herschlag/run',
    ],
    include_package_data=True,

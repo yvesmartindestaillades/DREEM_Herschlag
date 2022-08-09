@@ -12,6 +12,7 @@ class Sanity_check(object):
         self.path_to_data = config['path_to_data']
         self.sample_file = config['sample_file']
         self.dreem_args = config['dreem_args']
+        self.verbose = config['verbose']
 
     def files(self):
         # check that every file is there
@@ -21,7 +22,7 @@ class Sanity_check(object):
         assert os.path.exists(self.sample_file), f"{self.sample_file} doesn't exist"
 
     def check_samples(self):
-        print(f"Checking {self.sample_file}")
+        if self.verbose: print(f"Checking {self.sample_file}")
         # check the sanity of samples.csv
         df = pd.read_csv(self.sample_file)
         assert len(df['sample']) == len(df['sample'].unique()), "Every line isn't unique in samples.csv"
@@ -47,16 +48,16 @@ class Sanity_check(object):
             if col not in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env] \
                 + sample_attributes['optional']['all'] + sample_attributes['optional'][exp_env]:
                 if col in sample_attributes['optional']: 
-                    print(f"Ignored {col}, not in sample_attributes")
+                    if self.verbose: print(f"Ignored {col}, not in sample_attributes")
                     df = df.drop(columns=col)
 
         df.to_csv('temp/samples.csv', index=False)
-        print('Checking samples.csv done\n')
+        if self.verbose: print('Checking samples.csv done\n')
         return 1
 
     def check_library(self,s):
         # check the sanity of libraries.csv
-        print(f"Checking {s}/library.csv")
+        if self.verbose: print(f"Checking {s}/library.csv")
         df = pd.read_csv(self.path_to_data+s+'/library.csv')
         assert 'name' in list(df.columns), "name is not in library.csv"
         assert len(df['name']) == len(df['name'].unique()), f"Every name isn't unique in {s}/library.csv"
@@ -68,17 +69,19 @@ class Sanity_check(object):
         # check that every column of libraries.csv is in resources/library_attributes.yml
         for col in list(df.columns):
             if col not in library_attributes['mandatory'] + library_attributes['optional']:
-                print(f"Ignored {col}, not in library_attributes")
+                if self.verbose: print(f"Ignored {col}, not in library_attributes")
                 df = df.drop(columns=col)
         if not os.path.exists(f"temp/{s}"):
             os.mkdir(f"temp/{s}")
         df.to_csv(f"temp/{s}/library.csv", index=False)
 
-        print(f"Checking {s}/library.csv done\n")
+        if self.verbose: print(f"Checking {s}/library.csv done\n")
 
     def run(self):
+        if self.verbose: print("Checking files")
         self.files()
         self.check_samples()
         for s in self.samples:
             self.check_library(s)
+        if self.verbose: print("Checking files done\n")
         return 1

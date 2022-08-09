@@ -1,0 +1,41 @@
+[2022-08-08 19:11:26,485 bit_vector.py run] INFO ran at commandline as: 
+[2022-08-08 19:11:26,485 bit_vector.py run] INFO /Library/Frameworks/Python.framework/Versions/3.10/bin/dreem -fq1 /Users/ymdt/src/dreem/test/resources/case_1/r1.fastq -fq2 /Users/ymdt/src/dreem/test/resources/case_1/r2.fastq -fa /Users/ymdt/src/dreem/test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --overwrite --RNAstructure_path /Users/ymdt/src/RNAstructure/exe --bootstrap
+[2022-08-08 19:11:26,485 bit_vector.py validate_files] INFO fasta file: /Users/ymdt/src/dreem/test/resources/case_1/ref.fasta exists
+[2022-08-08 19:11:26,485 bit_vector.py validate_files] INFO fastq file: /Users/ymdt/src/dreem/test/resources/case_1/r1.fastq exists
+[2022-08-08 19:11:26,485 bit_vector.py validate_files] INFO fastq2 file: /Users/ymdt/src/dreem/test/resources/case_1/r2.fastq exists
+[2022-08-08 19:11:26,485 bit_vector.py validate_files] INFO two fastq files supplied, thus assuming paired reads
+[2022-08-08 19:11:26,485 bit_vector.py get_parameters] INFO -o/--overwrite supplied, will overwrite previous results with same name
+[2022-08-08 19:11:26,486 bit_vector.py build_directories] INFO building directory structure
+[2022-08-08 19:11:26,521 mapper.py __init__] INFO bowtie2 2.4.5 detected!
+[2022-08-08 19:11:26,669 mapper.py __init__] INFO fastqc v0.11.9 detected!
+[2022-08-08 19:11:26,694 mapper.py __init__] INFO trim_galore 0.6.6 detected!
+[2022-08-08 19:11:26,756 mapper.py __init__] INFO cutapt 1.18 detected!
+[2022-08-08 19:11:26,757 mapper.py __run_command] INFO running fastqc
+[2022-08-08 19:11:30,254 mapper.py __run_command] INFO fastqc ran without errors
+[2022-08-08 19:11:30,255 mapper.py __run_command] INFO running trim_galore
+[2022-08-08 19:11:35,504 mapper.py __run_command] INFO trim_galore ran without errors
+[2022-08-08 19:11:35,505 mapper.py __run_command] INFO running bowtie2-build
+[2022-08-08 19:11:35,591 mapper.py __run_command] INFO bowtie2-build ran without errors
+[2022-08-08 19:11:35,592 mapper.py __run_command] INFO running bowtie2 alignment
+[2022-08-08 19:11:35,833 mapper.py __run_command] INFO bowtie2 alignment ran without errors
+[2022-08-08 19:11:35,834 mapper.py __run_bowtie_alignment] INFO results for bowtie alignment: 
+2500 reads; of these:
+  2500 (100.00%) were paired; of these:
+    168 (6.72%) aligned concordantly 0 times
+    2331 (93.24%) aligned concordantly exactly 1 time
+    1 (0.04%) aligned concordantly >1 times
+93.28% overall alignment rate
+[2022-08-08 19:11:35,834 mapper.py __run_picard_bam_convert] INFO Converting BAM file to SAM file format
+[2022-08-08 19:11:35,834 mapper.py __run_command] INFO running picard BAM conversion
+[2022-08-08 19:11:37,381 mapper.py __run_command] INFO picard BAM conversion ran without errors
+[2022-08-08 19:11:37,382 mapper.py __run_picard_sort] INFO sorting BAM file
+[2022-08-08 19:11:37,382 mapper.py __run_command] INFO running picard BAM sort
+[2022-08-08 19:11:38,660 mapper.py __run_command] INFO picard BAM sort ran without errors
+[2022-08-08 19:11:38,661 mapper.py run] INFO finished mapping!
+[2022-08-08 19:11:38,662 bit_vector.py run] INFO starting bitvector generation
+[2022-08-08 19:11:38,665 bit_vector.py __run_command] INFO running picard SAM convert
+[2022-08-08 19:11:40,123 bit_vector.py __run_command] INFO picard SAM convert ran without errors
+[2022-08-08 19:12:28,630 bit_vector.py run] INFO MUTATION SUMMARY:
+| name          |   reads |   aligned |   no_mut |   1_mut |   2_mut |   3_mut |   3plus_mut |   sn |
+|---------------|---------|-----------|----------|---------|---------|---------|-------------|------|
+| mttr-6-alt-h3 |    2332 |     99.96 |    46.42 |   36.81 |   13.21 |    3.05 |        0.04 | 7.76 |
