@@ -40,11 +40,12 @@ samples:
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
 
 dreem_args:
-    overwrite: True
-    RNAstructure_path: /Users/ymdt/src/RNAstructure/exe
-    temperature: False
-    add_any_info: False  # Force these filters
-    bootstrap: True
+    overwrite: True     # Re-compute the bitvector if it already exists. Takes more time.
+    RNAstructure_path: /Users/ymdt/src/RNAstructure/exe  # where RNAstructure/exe is located on your computer. Remove if you don't want to run RNAstructure
+    temperature: False  # Use samples.csv col 'temperature_k' as an input for RNAstructure
+    bootstrap: True     # Run bootstrap
+
+# Print more information during run time
 verbose: True
 
 
