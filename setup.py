@@ -27,7 +27,7 @@ setup(
    author_email='yves@martin.yt',
    long_description= 'TODO',
  #  packages=['DREEM_Herschlag'],  #same as name
- #  package_dir={'DREEM_Herschlag': 'DREEM_Herschlag'},
+   package_dir={'DREEM_Herschlag': 'DREEM_Herschlag'},
    packages=find_packages(),
    package_data={'': ['*.yml']},
    py_modules=[
