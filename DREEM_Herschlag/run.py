@@ -3,6 +3,7 @@ from click_option_group import optgroup
 import yaml
 from DREEM_Herschlag.sanity_check import Sanity_check
 from DREEM_Herschlag.run_dreem import Run_dreem
+import os
 
 @click.command()
 @optgroup.group("main arguments")
@@ -28,6 +29,9 @@ def run(args):
     assert config['verbose'], "No verbose found in config file"
     assert config['sample_file'], "No sample_file found in config file"
 
+    for repo in ['temp', 'output','log','input']:
+        if not os.path.exists(repo):
+            os.makedirs(repo)
     
     Sanity_check(config).run()
     

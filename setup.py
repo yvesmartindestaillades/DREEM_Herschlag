@@ -1,5 +1,5 @@
 from pkg_resources import Requirement
-from setuptools import setup
+from setuptools import setup, find_packages
 import os, sys
 from DREEM_Herschlag import __version__
 import DREEM_Herschlag
@@ -26,8 +26,10 @@ setup(
    author='Yves Martin des Taillades',
    author_email='yves@martin.yt',
    long_description= 'TODO',
-   packages=['DREEM_Herschlag'],  #same as name
-   package_dir={'DREEM_Herschlag': 'DREEM_Herschlag'},
+ #  packages=['DREEM_Herschlag'],  #same as name
+ #  package_dir={'DREEM_Herschlag': 'DREEM_Herschlag'},
+   packages=find_packages(),
+   package_data={'': ['*.yml']},
    py_modules=[
        'DREEM_Herschlag/sanity_check',
        'DREEM_Herschlag/run_dreem',

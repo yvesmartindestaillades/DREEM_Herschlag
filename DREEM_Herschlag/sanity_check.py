@@ -4,6 +4,8 @@ from enum import unique
 import pandas as pd
 import os
 import yaml
+from DREEM_Herschlag.util import Path
+
 
 class Sanity_check(object):
     def __init__(self, config) -> None:
@@ -13,6 +15,7 @@ class Sanity_check(object):
         self.sample_file = config['sample_file']
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
+        self.path = Path()
 
     def files(self):
         # check that every file is there
@@ -31,7 +34,7 @@ class Sanity_check(object):
         for s in self.samples:
             assert s in list(df['sample']), f"{s} doesn't have a corresponding line in samples.csv"
 
-        with open('DREEM_Herschlag/resources/sample_attributes.yml', 'r') as f:
+        with open(self.path.sample_attribute_path, 'r') as f:
             sample_attributes = yaml.safe_load(f)
 
         assert len(df['exp_env'].unique()) == 1, "exp_env is not unique in samples.csv"
@@ -61,7 +64,7 @@ class Sanity_check(object):
         df = pd.read_csv(self.path_to_data+s+'/library.csv')
         assert 'name' in list(df.columns), "name is not in library.csv"
         assert len(df['name']) == len(df['name'].unique()), f"Every name isn't unique in {s}/library.csv"
-        with open('DREEM_Herschlag/resources/library_attributes.yml', 'r') as f:
+        with open(self.path.library_attributes_path, 'r') as f:
             library_attributes = yaml.safe_load(f)
         # check that every mandatory column is there
         for mand in library_attributes['mandatory']:
