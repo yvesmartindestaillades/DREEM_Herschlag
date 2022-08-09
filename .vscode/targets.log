@@ -202,23 +202,7 @@ Makefile:
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-push-image:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 17):
-	docker push $(DOCKER_IMAGE):$(VERSION)
 	
-
-build-image:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 12):
-	docker build .
-	-f ./Dockerfile
-	-t $(DOCKER_IMAGE):$(VERSION)
 	
 
 default:
