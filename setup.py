@@ -1,11 +1,10 @@
 from distutils.core import setup
 from setuptools import find_packages
-#from get_version import get_version
 import os, sys
 import sys
 
 try:
-    with open('requirements.txt') as f:
+    with open('/Users/ymdt/src/DREEM_Herschlag/requirements.txt') as f:
         requirements = f.read().splitlines()
 except:
     with open('../requirements.txt') as f:
@@ -18,8 +17,8 @@ if sys.version_info < PYTHON_VERSION:
 
 
 setup(
-   name='DREEM_Herschlag',
-   version='0.0.1',#get_version("DREEM_Herschlag/__init__.py"),
+   name='dreem_herschlag',
+   version='''1.0.1''',
    license="MIT",
    description='A wrapper for DREEM for the Herschlag lab',
    author='Yves Martin des Taillades',
@@ -33,13 +32,14 @@ setup(
        'DREEM_Herschlag/sanity_check',
        'DREEM_Herschlag/run_dreem',
        'DREEM_Herschlag/run',
+       'DREEM_Herschlag/util',
    ],
    include_package_data=True,
    install_requires=requirements, #external packages as dependencies
     entry_points = {
         'console_scripts' : [
             'dreem_herschlag = DREEM_Herschlag.run : main'
-        ]
+            ]
     },
     url='https://github.com/yvesmartindestaillades/DREEM_Herschlag'
 )

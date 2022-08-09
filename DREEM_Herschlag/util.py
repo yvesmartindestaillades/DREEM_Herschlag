@@ -10,3 +10,25 @@ class Path(object):
         self.sample_attribute_path = self.resources_file+'/sample_attributes.yml'
         self.library_attributes_path = self.resources_file+'/library_attributes.yml'
 
+def get_attributes(file):
+    path = Path()
+    if file == 'samples.csv':
+        with open(path.sample_attribute_path, 'r') as f:
+            attributes = f.read()
+        f.close()
+
+    if file == 'library.csv':
+        with open(path.library_attributes_path, 'r') as f:
+            attributes = f.read()
+        f.close()
+    return attributes
+
+def echo_attributes(file):
+    attributes = get_attributes(file)
+    print(attributes)
+
+def echo_attributes_samples():
+    echo_attributes('samples.csv')
+
+def echo_attributes_library():
+    echo_attributes('library.csv')
