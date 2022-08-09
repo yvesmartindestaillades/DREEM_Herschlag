@@ -27,7 +27,6 @@ def run(args):
     assert config['path_to_data'], "No path_to_data found in config file"
     assert config['dreem_args'], "No dreem_args found in config file"
     assert config['verbose'], "No verbose found in config file"
-    assert config['sample_file'], "No sample_file found in config file"
 
     for repo in ['temp', 'output','log','input']:
         if not os.path.exists(repo):
