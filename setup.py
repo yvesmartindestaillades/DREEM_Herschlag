@@ -1,8 +1,7 @@
-from pkg_resources import Requirement
-from setuptools import setup, find_packages
+from distutils.core import setup
+from setuptools import find_packages
+#from get_version import get_version
 import os, sys
-from DREEM_Herschlag import __version__
-import DREEM_Herschlag
 import sys
 
 try:
@@ -20,7 +19,7 @@ if sys.version_info < PYTHON_VERSION:
 
 setup(
    name='DREEM_Herschlag',
-   version=__version__,
+   version='0.0.1',#get_version("DREEM_Herschlag/__init__.py"),
    license="MIT",
    description='A wrapper for DREEM for the Herschlag lab',
    author='Yves Martin des Taillades',
@@ -41,5 +40,6 @@ setup(
         'console_scripts' : [
             'dreem_herschlag = DREEM_Herschlag.run : main'
         ]
-    }
+    },
+    url='https://github.com/yvesmartindestaillades/DREEM_Herschlag'
 )

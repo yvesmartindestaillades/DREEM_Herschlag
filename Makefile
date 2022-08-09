@@ -1,12 +1,12 @@
 DOCKER_IMAGE := ydmt/DREEM_Herschlag
 VERSION := $(shell git describe --always --dirty --long)
 default:
-	echo "See readme"
 	pip3 uninstall DREEM_Herschlag -y
 	pip3 install .
 	
 init:
 	pip install -r requirements.txt
+	pip3 install .
 
 pin-dependencies:
 	pip install -U pip-tools

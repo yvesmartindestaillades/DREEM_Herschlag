@@ -9,8 +9,8 @@ class Sanity_check(object):
     def __init__(self, config) -> None:
         self.samples = config['samples']
         self.files_per_sample = config['files_per_sample']
-        self.path_to_data = config['path_to_data']
-        self.sample_file = config['sample_file']
+        self.path_to_data = config['path_to_data'] if config['path_to_data'][-1] == '/' else config['path_to_data'] + '/'
+        self.sample_file = self.path_to_data+'samples.csv'
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
         self.path = Path()
