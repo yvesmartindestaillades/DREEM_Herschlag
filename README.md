@@ -1,5 +1,3 @@
-## Herschlag lab DREEM DREEM_Herschlag
-
 This repo is a wrapper for Joe Yesselman's DREEM module, that implements the DREEM algorithm developed by the Rouskin lab.
 
 The wrapper allows the user to run DREEM on different samples and to add standardized experimental details to DREEM output.
