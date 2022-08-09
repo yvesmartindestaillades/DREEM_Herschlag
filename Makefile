@@ -8,14 +8,6 @@ default:
 init:
 	pip install -r requirements.txt
 
-build-image:
-	docker build .
-		-f ./Dockerfile
-		-t $(DOCKER_IMAGE):$(VERSION)
-
-push-image:
-	docker push $(DOCKER_IMAGE):$(VERSION)
-
 pin-dependencies:
 	pip install -U pip-tools
 	pip-compile requirements.in
