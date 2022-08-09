@@ -35,6 +35,7 @@ input
 
 # ingore output
 output
-
 # ignore temp
 temp
+
+lib
