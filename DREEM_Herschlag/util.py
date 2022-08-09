@@ -9,6 +9,7 @@ class Path(object):
         self.DREEM_Herschlag_file = '/'.join(DREEM_Herschlag_file.split('/')[:-1])
         self.sample_attribute_path = self.resources_file+'/sample_attributes.yml'
         self.library_attributes_path = self.resources_file+'/library_attributes.yml'
+        self.config_template = self.resources_file+'/config-template.yml'
 
 def get_attributes(file, type='txt'):
     path = Path()
@@ -61,7 +62,22 @@ def generate_template_library():
     all_cols = attributes['mandatory']+attributes['optional']
     _write_cols_to_csv(f"template_library.csv",all_cols)
 
+def generate_config_template():
+    path = Path()
+    with open(path.config_template,'r') as f:
+        temp = f.read()
+        f.close()
+    with open('template_config.yml','w') as f:
+        f.write(temp)
+        f.close()
+
 def generate_templates():
     generate_template_samples('in_vivo')
+    print('template_samples_in_vivo.csv    generated')
     generate_template_samples('in_vitro')
+    print('template_samples_in_vitro.csv   generated')
     generate_template_library()
+    print('template_library.csv            generated')
+    generate_config_template()
+    print('template_config.csv             generated')
+generate_config_template()

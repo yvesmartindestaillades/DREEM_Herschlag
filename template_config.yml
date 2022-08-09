@@ -1,0 +1,50 @@
+# Where you store your data
+# -------------------------
+# your data must be organized this way:
+#|- /[path_to_data]
+#     |- samples.csv
+#     |- /[your_sample_1]
+#          |- r1.fastq
+#          |- r2.fastq
+#          |- ref.fasta
+#          |- library.csv
+#     |- /[your_sample_2]
+#          |- ...
+#     |- /[your_sample_3]
+#          |- ...
+#     |- ...
+
+path_to_data: /Users/ymdt/src/dreem/test/resources/  
+
+# it's not recommanded to change this
+files_per_sample:
+  - r1.fastq
+  - r2.fastq
+  - ref.fasta
+  - library.csv
+
+# The samples that you want to process today
+# ------------------------------------------
+# These names must correspond to
+#     - the sample column in samples.csv
+#     - the name of your data folders
+#
+# Nota bene: obviously, the name of your data folders must match the sample column of samples.csv
+
+samples:
+  - case_1
+ # - case_2
+
+# The arguments to pass direcly to DREEM
+# --------------------------------------
+# More information about hese arguments here: https://github.com/jyesselm/dreem#run
+
+dreem_args:
+    overwrite: True
+    RNAstructure_path: /Users/ymdt/src/RNAstructure/exe
+    temperature: False
+    add_any_info: False  # Force these filters
+    bootstrap: True
+verbose: True
+
+

@@ -45,12 +45,11 @@ Your fasta/fastq files organization should look like this:
 
 To add additional experimental information to DREEM's output, you can to create two different types of files, samples.csv and library.csv.
 
-Generate templates for `samples.csv` and `library.csv` by running:
+Generate templates for `samples.csv`, `library.csv` and `my_config.yml` by running:
 
 ```
 dreem_herschlag --generate_templates
 ```
-
 
 `samples.csv` contains information about the sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
@@ -62,7 +61,7 @@ Columns description for `samples.csv` can be found by typing:
 dreem_herschlag --sample_info
 ```
 
-> __*NOTE:*__ `exp_env` must be `in_vivo` or `in_vitro`
+> __*NOTE:*__ `exp_env` MUST BE `in_vivo` or `in_vitro`, or the code won't run
 
 `library.csv` contains information about each construct in a sample.
 There must be one `library.csv` file per sample.
@@ -76,8 +75,8 @@ dreem_herschlag --library_info
 
 ### Fill in config.yml
 
-- Download the `config-template.yml` template at the root of this repo.
-- You may rename your file `my_config.yml` or whatever sounds good to you.
+- Download the `template_config.yml` template at the root of this repo, or generate it with ``dreem_herschlag --generate_templates``
+- You may rename your file `my_config.yml` or whatever sounds good to you, so that you don't overwrite it.
 - Open the file and follow the fill-in instructions.
 
 ### RUN!
