@@ -33,6 +33,11 @@ log
 # ignore input
 input
 
+# ignore etc
+etc
+
+ign
+
 # ingore output
 output
 # ignore temp
