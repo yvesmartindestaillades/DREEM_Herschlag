@@ -44,6 +44,12 @@ class Sanity_check(object):
         for mand in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env]:
             assert mand in list(df.columns), f"{mand} is not in samples.csv"
         
+        # check that every mandatory column of samples.csv is not empty for every sample
+        for mand in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env]:
+            for s in self.samples:
+                print(df[df['sample']==s][mand])
+                assert df[df['sample']==s][mand].isnull().sum() == 0, f"{mand} is empty in samples.csv for sample {s}"
+            
         # Drop unauthorised columns
         for col in list(df.columns):
             if col not in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env] \
@@ -67,6 +73,10 @@ class Sanity_check(object):
         # check that every mandatory column is there
         for mand in library_attributes['mandatory']:
             assert mand in list(df.columns), f"{mand} is not in {s}/library.csv"
+            # check that every mandatory column of samples.csv is not empty for every sample
+            assert df[df['name'] != ''][mand].isnull().sum() == 0, f"{mand} is empty for at a least one row in {s}/library.csv"
+            
+        
         # check that every column of libraries.csv is in resources/library_attributes.yml
         for col in list(df.columns):
             if col not in library_attributes['mandatory'] + library_attributes['optional']:

@@ -14,7 +14,7 @@
 #          |- ...
 #     |- ...
 
-path_to_data: /Users/ymdt/src/dreem/test/resources/  
+path_to_data: /Users/ymdt/src/DREEM_Herschlag/test/resources/  
 
 # it's not recommanded to change this
 files_per_sample:
