@@ -131,6 +131,8 @@ Generate templates for `samples.csv`, `library.csv` and `my_config.yml` by runni
 dreem_herschlag --generate_templates
 ```
 
+__*SAMPLES.CSV*__
+
 `samples.csv` contains information about each sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
 The `sample` column of `samples.csv` must match the `your_sample_#` folders names shown above.
@@ -142,6 +144,8 @@ dreem_herschlag --sample_info
 ```
 
 > __*NOTE:*__ `exp_env` MUST BE `in_vivo` or `in_vitro`, or the code won't run
+
+__*LIBRARY.CSV*__
 
 `library.csv` contains information about each construct in a sample.
 There must be one `library.csv` file per sample.
