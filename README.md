@@ -141,14 +141,13 @@ __*SAMPLES.CSV*__
 `samples.csv` contains information about each sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
 The `sample` column of `samples.csv` must match the `your_sample_#` folders names shown above.
+`exp_env` column content MUST BE set to `in_vivo` or `in_vitro`, or the code won't run.
 
 Columns description for `samples.csv` can be found by typing:
 
 ```
 dreem_herschlag --sample_info
 ```
-
-> __*NOTE:*__ `exp_env` MUST BE `in_vivo` or `in_vitro`, or the code won't run
 
 
 __*LIBRARY.CSV*__
