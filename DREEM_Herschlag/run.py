@@ -55,7 +55,7 @@ def run(args):
         Sanity_check(config).run()
         Run_dreem(config).run()
         if config['mut_hist_only_folder']:
-            generate_mh_only_folder()
+            generate_mh_only_folder(config['samples'])
 
 
 

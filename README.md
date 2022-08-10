@@ -28,7 +28,7 @@ make init
 
 ## Test your installation
 
-If you want to use RNAstructure, open `test/test_config.yml` and assign `dreem_args/RNAstructure_path` to your path the `RNAstructure/exe`.
+(optional) If you want to use RNAstructure, open `test/test_config.yml` and assign `dreem_args/RNAstructure_path` to your path the `RNAstructure/exe`.
 
 Run:
 
@@ -39,6 +39,7 @@ dreem_herschlag --config test/test_config.yml
 
 You should get this output:
 ```
+$ dreem_herschlag --config test/test_config.yml
 dreem_herschlag --config test/test_config.yml
 Checking files
 Checking test/resources/samples.csv
@@ -51,35 +52,53 @@ Checking case_1/library.csv done
 Checking files done
 
 Running DREEM
-dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --bootstrap 
-[19:12 bit_vector.py run] INFO ran at commandline as: 
-[19:12 bit_vector.py run] INFO /Users/ymdt/src/DREEM_Herschlag/bin/dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --bootstrap
-[19:12 bit_vector.py validate_files] INFO fasta file: test/resources/case_1/ref.fasta exists
-[19:12 bit_vector.py validate_files] INFO fastq file: test/resources/case_1/r1.fastq exists
-[19:12 bit_vector.py validate_files] INFO fastq2 file: test/resources/case_1/r2.fastq exists
-[19:12 bit_vector.py validate_files] INFO two fastq files supplied, thus assuming paired reads
-[19:12 bit_vector.py build_directories] INFO building directory structure
-[19:12 mapper.py __init__] INFO bowtie2 2.4.5 detected!
-[19:12 mapper.py __init__] INFO fastqc v0.11.9 detected!
-[19:12 mapper.py __init__] INFO trim_galore 0.6.6 detected!
-[19:12 mapper.py __init__] INFO cutapt 1.18 detected!
-[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING fastqc, it has been run already! specify -overwrite to rerun
-[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING trim_galore, it has been run already! specify -overwrite to rerun
-[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING bowtie-build, it has been run already! specify -overwrite to rerun
-[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING bowtie2 alignment, it has been run already! specify -overwrite to rerun
-[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING picard BAM conversion, it has been run already! specify -overwrite to rerun
-[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING picard BAM sort, it has been run already! specify -overwrite to rerun
-[19:12 mapper.py run] INFO finished mapping!
-[19:12 bit_vector.py run] INFO starting bitvector generation
-[19:12 bit_vector.py __run_picard_sam_convert] INFO SKIPPING picard SAM convert, it has been run already! specify -overwrite to rerun
-[19:12 bit_vector.py __generate_all_bit_vectors] INFO SKIPPING bit vector generation, it has run already! specify -overwrite to rerun
-[19:12 bit_vector.py run] INFO MUTATION SUMMARY:
+dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --overwrite 
+[19:27 bit_vector.py run] INFO ran at commandline as: 
+[19:27 bit_vector.py run] INFO /Users/ymdt/src/DREEM_Herschlag/bin/dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --overwrite
+[19:27 bit_vector.py validate_files] INFO fasta file: test/resources/case_1/ref.fasta exists
+[19:27 bit_vector.py validate_files] INFO fastq file: test/resources/case_1/r1.fastq exists
+[19:27 bit_vector.py validate_files] INFO fastq2 file: test/resources/case_1/r2.fastq exists
+[19:27 bit_vector.py validate_files] INFO two fastq files supplied, thus assuming paired reads
+[19:27 bit_vector.py get_parameters] INFO -o/--overwrite supplied, will overwrite previous results with same name
+[19:27 bit_vector.py build_directories] INFO building directory structure
+[19:27 mapper.py __init__] INFO bowtie2 2.4.5 detected!
+[19:27 mapper.py __init__] INFO fastqc v0.11.9 detected!
+[19:27 mapper.py __init__] INFO trim_galore 0.6.6 detected!
+[19:27 mapper.py __init__] INFO cutapt 1.18 detected!
+[19:27 mapper.py __run_command] INFO running fastqc
+[19:27 mapper.py __run_command] INFO fastqc ran without errors
+[19:27 mapper.py __run_command] INFO running trim_galore
+[19:27 mapper.py __run_command] INFO trim_galore ran without errors
+[19:27 mapper.py __run_command] INFO running bowtie2-build
+[19:27 mapper.py __run_command] INFO bowtie2-build ran without errors
+[19:27 mapper.py __run_command] INFO running bowtie2 alignment
+[19:27 mapper.py __run_command] INFO bowtie2 alignment ran without errors
+[19:27 mapper.py __run_bowtie_alignment] INFO results for bowtie alignment: 
+2500 reads; of these:
+  2500 (100.00%) were paired; of these:
+    168 (6.72%) aligned concordantly 0 times
+    2331 (93.24%) aligned concordantly exactly 1 time
+    1 (0.04%) aligned concordantly >1 times
+93.28% overall alignment rate
+[19:27 mapper.py __run_picard_bam_convert] INFO Converting BAM file to SAM file format
+[19:27 mapper.py __run_command] INFO running picard BAM conversion
+[19:27 mapper.py __run_command] INFO picard BAM conversion ran without errors
+[19:27 mapper.py __run_picard_sort] INFO sorting BAM file
+[19:27 mapper.py __run_command] INFO running picard BAM sort
+[19:27 mapper.py __run_command] INFO picard BAM sort ran without errors
+[19:27 mapper.py run] INFO finished mapping!
+[19:27 bit_vector.py run] INFO starting bitvector generation
+[19:27 bit_vector.py __run_command] INFO running picard SAM convert
+[19:27 bit_vector.py __run_command] INFO picard SAM convert ran without errors
+[19:27 bit_vector.py run] INFO MUTATION SUMMARY:
 | name          |   reads |   aligned |   no_mut |   1_mut |   2_mut |   3_mut |   3plus_mut |   sn |
 |---------------|---------|-----------|----------|---------|---------|---------|-------------|------|
 | mttr-6-alt-h3 |    2332 |     99.96 |    46.42 |   36.81 |   13.21 |    3.05 |        0.04 | 7.76 |
 
 None
 DREEM done
+
+transfered mh.p to mh_only/case_1
 ```
 
 ## Run DREEM
