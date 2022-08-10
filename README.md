@@ -123,7 +123,7 @@ Your fasta/fastq files organization should look like this:
 
 ### Write additional experimental information files (optional)
 
-To add additional experimental information to DREEM's output, you can to create two different types of files, samples.csv and library.csv.
+To add additional experimental information to DREEM's output, you can to create two different types of files, `samples.csv` and `library.csv`.
 
 Generate templates for `samples.csv`, `library.csv` and `my_config.yml` by running:
 
