@@ -141,7 +141,7 @@ __*SAMPLES.CSV*__
 `samples.csv` contains information about each sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
 The `sample` column of `samples.csv` must match the `your_sample_#` folders names shown above.
-`exp_env` column content MUST BE set to `in_vivo` or `in_vitro`, or the code won't run.
+`exp_env` column content MUST BE set to `in_vivo` or `in_vitro`.
 
 Columns description for `samples.csv` can be found by typing:
 
