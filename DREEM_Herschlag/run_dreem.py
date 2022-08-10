@@ -23,7 +23,7 @@ class Run_dreem(object):
 
             for key, val in self.dreem_args.items():
                 if (not (type(val) == bool)) or val:
-                    cmd += ' --'+ key + ' '+ (val if type(val) != bool else '')
+                    cmd += ' --'+ key + ' '+ (str(val) if type(val) != bool else '')
 
             if self.verbose: print(cmd)
             [print(out) for out in util.run_command(cmd)] if self.verbose else util.run_command(cmd)
