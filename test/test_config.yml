@@ -14,7 +14,7 @@
 #          |- ...
 #     |- ...
 
-path_to_data: /Users/ymdt/src/dreem/test/resources/  
+path_to_data: test/resources/  
 
 # it's not recommanded to change this
 files_per_sample:
@@ -40,11 +40,19 @@ samples:
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
 
 dreem_args:
-    overwrite: True
-    RNAstructure_path: /Users/ymdt/src/RNAstructure/exe
-    temperature: False
-    add_any_info: False  # Force these filters
-    bootstrap: True
+    overwrite: False     # Re-compute the bitvector if it already exists. Takes more time.
+   # RNAstructure_path: /Users/ymdt/src/RNAstructure/exe  # where RNAstructure/exe is located on your computer. Remove if you don't want to run RNAstructure
+    temperature: False  # Use samples.csv col 'temperature_k' as an input for RNAstructure
+    bootstrap: True     # Run bootstrap
+
+# Print more information during run time
 verbose: True
 
-
+# There's a bunch of folders in output/. This option creates a folder such that:
+# /mh_only
+#   |- your_sample_1
+#       |- mh.p
+#   |- your_sample_2
+#       |- mh.p
+#   ...
+mut_hist_only_folder: True

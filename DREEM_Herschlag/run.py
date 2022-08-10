@@ -5,7 +5,7 @@ from DREEM_Herschlag.sanity_check import Sanity_check
 from DREEM_Herschlag.run_dreem import Run_dreem
 import os
 
-from DREEM_Herschlag.util import echo_attributes_samples, echo_attributes_library, generate_templates
+from DREEM_Herschlag.util import echo_attributes_samples, echo_attributes_library, generate_templates, generate_mh_only_folder
 
 @click.command()
 @optgroup.group("main arguments")
@@ -24,6 +24,21 @@ def main(**args):
     """
     run(args)
 
+def read_config(args):
+    with open(args['config'], 'r') as f:
+        config = yaml.safe_load(f)
+    assert config['samples'], "No samples found in config file"
+    assert config['files_per_sample'], "No files_per_sample found in config file"
+    assert config['path_to_data'], "No path_to_data found in config file"
+    assert config['dreem_args'], "No dreem_args found in config file"
+    assert config['verbose'] != None, "No verbose found in config file"
+    assert config['mut_hist_only_folder'] != None, "No mut_hist_only_folder found in config file"
+    return config
+
+def make_dirs():
+    for repo in ['temp', 'output','log','input']:
+        if not os.path.exists(repo):
+            os.makedirs(repo)
 
 def run(args):
     if args['samples_info']:
@@ -35,22 +50,15 @@ def run(args):
     if args['samples_info'] or args['library_info'] or args['generate_templates']:
         exit()
     else:
-        with open(args['config'], 'r') as f:
-            config = yaml.safe_load(f)
-        assert config['samples'], "No samples found in config file"
-        assert config['files_per_sample'], "No files_per_sample found in config file"
-        assert config['path_to_data'], "No path_to_data found in config file"
-        assert config['dreem_args'], "No dreem_args found in config file"
-        assert config['verbose'], "No verbose found in config file"
-
-        for repo in ['temp', 'output','log','input']:
-            if not os.path.exists(repo):
-                os.makedirs(repo)
-        
+        config = read_config(args)
+        make_dirs()
         Sanity_check(config).run()
-        
         Run_dreem(config).run()
-    
+        if config['mut_hist_only_folder']:
+            generate_mh_only_folder()
+
+
+
 
 if __name__ == "__main__":
     main()

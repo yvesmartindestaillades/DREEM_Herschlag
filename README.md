@@ -4,6 +4,10 @@ This repo is a wrapper for [Joe Yesselman's DREEM module](https://github.com/jye
 
 The wrapper allows the user to run DREEM on different samples and to add standardized experimental details to DREEM output.
 
+## Requirements
+
+DREEM package must be in your environment.
+You need RNAstructure installed to run RNAstructure, otherwise deactivate this option in the config file.
 
 ## Installation
 
@@ -20,6 +24,60 @@ cd [PATH_TO_WHERE_YOU_WANT_THE_REPO]
 git clone https://github.com/yvesmartindestaillades/DREEM_Herschlag
 cd DREEM_Herschlag
 make init
+```
+
+## Test your installation
+
+Run:
+
+```
+cd PATH/TO/REPO
+dreem_herschlag --config test/test_config.yml
+```
+
+You should get this output:
+```
+dreem_herschlag --config test/test_config.yml
+Checking files
+Checking test/resources/samples.csv
+Checking samples.csv done
+
+Checking case_1/library.csv
+Ignored sequence, not in library_attributes
+Checking case_1/library.csv done
+
+Checking files done
+
+Running DREEM
+dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --bootstrap 
+[19:12 bit_vector.py run] INFO ran at commandline as: 
+[19:12 bit_vector.py run] INFO /Users/ymdt/src/DREEM_Herschlag/bin/dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --bootstrap
+[19:12 bit_vector.py validate_files] INFO fasta file: test/resources/case_1/ref.fasta exists
+[19:12 bit_vector.py validate_files] INFO fastq file: test/resources/case_1/r1.fastq exists
+[19:12 bit_vector.py validate_files] INFO fastq2 file: test/resources/case_1/r2.fastq exists
+[19:12 bit_vector.py validate_files] INFO two fastq files supplied, thus assuming paired reads
+[19:12 bit_vector.py build_directories] INFO building directory structure
+[19:12 mapper.py __init__] INFO bowtie2 2.4.5 detected!
+[19:12 mapper.py __init__] INFO fastqc v0.11.9 detected!
+[19:12 mapper.py __init__] INFO trim_galore 0.6.6 detected!
+[19:12 mapper.py __init__] INFO cutapt 1.18 detected!
+[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING fastqc, it has been run already! specify -overwrite to rerun
+[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING trim_galore, it has been run already! specify -overwrite to rerun
+[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING bowtie-build, it has been run already! specify -overwrite to rerun
+[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING bowtie2 alignment, it has been run already! specify -overwrite to rerun
+[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING picard BAM conversion, it has been run already! specify -overwrite to rerun
+[19:12 mapper.py __skip_without_overwrite] INFO SKIPPING picard BAM sort, it has been run already! specify -overwrite to rerun
+[19:12 mapper.py run] INFO finished mapping!
+[19:12 bit_vector.py run] INFO starting bitvector generation
+[19:12 bit_vector.py __run_picard_sam_convert] INFO SKIPPING picard SAM convert, it has been run already! specify -overwrite to rerun
+[19:12 bit_vector.py __generate_all_bit_vectors] INFO SKIPPING bit vector generation, it has run already! specify -overwrite to rerun
+[19:12 bit_vector.py run] INFO MUTATION SUMMARY:
+| name          |   reads |   aligned |   no_mut |   1_mut |   2_mut |   3_mut |   3plus_mut |   sn |
+|---------------|---------|-----------|----------|---------|---------|---------|-------------|------|
+| mttr-6-alt-h3 |    2332 |     99.96 |    46.42 |   36.81 |   13.21 |    3.05 |        0.04 | 7.76 |
+
+None
+DREEM done
 ```
 
 ## Run DREEM
