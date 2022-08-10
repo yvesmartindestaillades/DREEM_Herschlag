@@ -28,6 +28,8 @@ make init
 
 ## Test your installation
 
+If you want to use RNAstructure, open `test/test_config.yml` and assign `dreem_args/RNAstructure_path` to your path the `RNAstructure/exe`.
+
 Run:
 
 ```
