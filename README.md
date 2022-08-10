@@ -121,9 +121,13 @@ Your fasta/fastq files organization should look like this:
           |- ...
 ```
 
-### Write additional experimental information files (optional)
+### Write additional experimental information files
 
-To add additional experimental information to DREEM's output, you can to create two different types of files, `samples.csv` and `library.csv`.
+To add additional experimental information to DREEM's output, you have to create two different types of files, `samples.csv` and `library.csv`.
+
+
+__*TEMPLATES.CSV*__
+
 
 Generate templates for `samples.csv`, `library.csv` and `my_config.yml` by running:
 
@@ -132,6 +136,7 @@ dreem_herschlag --generate_templates
 ```
 
 __*SAMPLES.CSV*__
+
 
 `samples.csv` contains information about each sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
@@ -145,7 +150,9 @@ dreem_herschlag --sample_info
 
 > __*NOTE:*__ `exp_env` MUST BE `in_vivo` or `in_vitro`, or the code won't run
 
+
 __*LIBRARY.CSV*__
+
 
 `library.csv` contains information about each construct in a sample.
 There must be one `library.csv` file per sample.
