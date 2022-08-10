@@ -131,7 +131,7 @@ Generate templates for `samples.csv`, `library.csv` and `my_config.yml` by runni
 dreem_herschlag --generate_templates
 ```
 
-`samples.csv` contains information about the sample as a whole, such as the temperature or the date. 
+`samples.csv` contains information about each sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
 The `sample` column of `samples.csv` must match the `your_sample_#` folders names shown above.
 
