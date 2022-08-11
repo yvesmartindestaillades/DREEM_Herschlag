@@ -50,35 +50,44 @@ def _write_cols_to_csv(file,all_cols):
         f.write(chain[:-1]+'\n'*3)
         f.close()
 
-def generate_template_samples(exp_env):
+def generate_template_samples(exp_env:str, path:str):
     attributes = get_attributes('samples.csv','yml')
     assert exp_env in ['in_vivo','in_vitro'], "exp_env must be 'in_vivo' or 'in_vitro'"
     all_cols = [attributes[a][b] for a in ['mandatory','optional'] for b in ['all',exp_env]][:-1]
     all_cols = [item for sublist in all_cols for item in sublist if item is not None]
-    _write_cols_to_csv(f"template_samples_{exp_env}.csv",all_cols)
+    _write_cols_to_csv(f"{format_path(path)}template_samples_{exp_env}.csv",all_cols)
 
-def generate_template_library():
+def generate_template_library(path:str):
     attributes = get_attributes('library.csv','yml')
     all_cols = attributes['mandatory']+attributes['optional']
-    _write_cols_to_csv(f"template_library.csv",all_cols)
+    _write_cols_to_csv(f"{format_path(path)}template_library.csv",all_cols)
 
-def generate_config_template():
-    path = Path()
-    with open(path.config_template,'r') as f:
+def generate_config_template(path:str):
+    p = Path()
+    with open(p.config_template,'r') as f:
         temp = f.read()
         f.close()
-    with open('template_config.yml','w') as f:
+    with open(f"{format_path(path)}template_config.yml",'w') as f:
         f.write(temp)
         f.close()
 
-def generate_templates():
-    generate_template_samples('in_vivo')
+def format_path(path):
+    if path == '.':
+        return os.getcwd()
+    if path[-1] != '/':
+        path = path+'/'
+    if not os.path.exists(path):
+        os.makedirs(path)
+    return path
+
+def generate_templates(path:str):
+    generate_template_samples('in_vivo',path)
     print('template_samples_in_vivo.csv    generated')
-    generate_template_samples('in_vitro')
+    generate_template_samples('in_vitro',path)
     print('template_samples_in_vitro.csv   generated')
-    generate_template_library()
+    generate_template_library(path)
     print('template_library.csv            generated')
-    generate_config_template()
+    generate_config_template(path)
     print('template_config.csv             generated')
 
 def generate_mh_only_folder(samples):

@@ -44,7 +44,7 @@ dreem_args:
    # RNAstructure_path:          # where RNAstructure/exe is located on your computer. Remove if you don't want to run RNAstructure
     temperature: False           # Use samples.csv col 'temperature_k' as an input for RNAstructure
     bootstrap_cl: 0.95           # Confidence level used for bootstrapping
-    bootstrap_n_resamples: 1000    # Number of samples used for bootstrapping
+    bootstrap_n_resamples: 1000    # Number of resamples used for bootstrapping
 
 # Print more information during run time
 verbose: True

@@ -1,5 +1,4 @@
-
-from dreem import util
+import subprocess
 
 class Run_dreem(object):
     def __init__(self, config) -> None:
@@ -9,6 +8,16 @@ class Run_dreem(object):
         self.sample_file = 'temp/samples.csv'
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
+
+    def run_command(cmd):
+        output, error_msg = None, None
+        try:
+            output = subprocess.check_output(
+                    cmd, shell=True, stderr=subprocess.STDOUT
+            ).decode("utf8")
+        except subprocess.CalledProcessError as exc:
+            error_msg = exc.output.decode("utf8")
+        return output, error_msg
 
     def run(self):
         if self.verbose: print(f"Running DREEM")
@@ -26,5 +35,5 @@ class Run_dreem(object):
                     cmd += ' --'+ key + ' '+ (str(val) if type(val) != bool else '')
 
             if self.verbose: print(cmd)
-            [print(out) for out in util.run_command(cmd)] if self.verbose else util.run_command(cmd)
+            [print(out) for out in self.run_command(cmd)] if self.verbose else self.run_command(cmd)
         if self.verbose: print('DREEM done\n')
