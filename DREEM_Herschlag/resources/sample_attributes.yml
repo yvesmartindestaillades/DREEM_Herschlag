@@ -27,8 +27,8 @@ mandatory:
     - sequencing_kit # Sequencing kit
     - sequencing_workflow # Workflow
     - sequencing_chemistry # Chemistry
-    - sequencing_read_length # Read length and PE
-    - sequencing_PE
+    - sequencing_read_length # Read length 
+    - reads_paired # True if paired end, false if single end
 
   in_vitro:
     - salt_mono # Monovalent salt
@@ -49,14 +49,14 @@ mandatory:
     - pass_num  # Passage number
     - seed_density # Seeding density
     - seed_plate_size # plate size
-    - seed_time_secs #  time since seeding in secondsimage.png
+    - seed_time_hours #  time since seeding in hours
     - transfection_date # Date of transfection
     - transfection_experimenter # Experimenter
     - plasmid # Plasmid
     - transfection_amount # Amount transfected
     - transfection_reagent # Transfection reagent and lot # 
     - transfection_confluency_est # Confluency estimate at transfection
-    - transfection_DMS_add_time_secs # Time between transfection and DMS addition in seconds
+    - transfection_DMS_add_time_hours # Time between transfection and DMS addition in hours
 
 
 optional:
