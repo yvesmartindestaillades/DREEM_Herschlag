@@ -132,7 +132,7 @@ __*TEMPLATES.CSV*__
 Generate templates for `samples.csv`, `library.csv` and `my_config.yml` by running:
 
 ```
-dreem_herschlag --generate_templates
+dreem_herschlag --generate_templates .
 ```
 
 __*SAMPLES.CSV*__
