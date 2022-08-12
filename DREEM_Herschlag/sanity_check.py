@@ -2,7 +2,7 @@
 import pandas as pd
 import os
 import yaml
-from DREEM_Herschlag.util import Path, run_command
+from dreem_herschlag.util import Path, run_command
 
 
 class Sanity_check(object):

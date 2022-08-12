@@ -2,16 +2,25 @@ from email.policy import default
 import click
 from click_option_group import optgroup
 import yaml
-from DREEM_Herschlag.sanity_check import Sanity_check
-from DREEM_Herschlag.run_dreem import Run_dreem
-import os
+import os, sys
 
-from DREEM_Herschlag.get_info import echo_attributes_samples, echo_attributes_library
-from DREEM_Herschlag.templates import TemplateGenerator
-from DREEM_Herschlag.util import generate_mh_only_folder
+path = os.path.dirname('/'.join(os.path.abspath(__file__).split('/')[:-1]))
+sys.path.append(path)
+
+from dreem_herschlag.sanity_check import Sanity_check
+from dreem_herschlag.run_dreem import Run_dreem
+
+from dreem_herschlag.get_info import echo_attributes_samples, echo_attributes_library
+from dreem_herschlag.templates import TemplateGenerator
+from dreem_herschlag.generate_mh_only import generate_mh_only_folder
+from dreem_herschlag.add_info import AddInfo
+
 
 @click.command()
 @optgroup.group("main arguments")
+@optgroup.option("-r", "--run_dreem", is_flag=True, help="Run dreem")
+@optgroup.option("-a", "--add-info", is_flag=True, help="Add info to existing DREEM outputs")
+
 @optgroup.option("-c", "--config", type=click.Path(exists=True),
                  help="reference sequences in fasta format")
 
@@ -25,6 +34,7 @@ def main(**args):
     profiles that relate to DMS modification rates written by Silvi Rouskin and the
     Rouskin lab (https://www.rouskinlab.com/)
     """
+    print(args)
     run(args)
 
 def read_config(args):
@@ -56,12 +66,14 @@ def run(args):
         config = read_config(args)
         make_dirs()
         Sanity_check(config).run()
-        Run_dreem(config).run()
+        if args['run_dreem']:
+            Run_dreem(config).run()
+        if args['add_info']:
+            AddInfo(config).run()
         if config['mut_hist_only_folder']:
             generate_mh_only_folder(config['samples'])
 
 
-
-
 if __name__ == "__main__":
+    sys.argv = ['run.py', '-c','template_config.yml']
     main()

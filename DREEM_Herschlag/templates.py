@@ -1,5 +1,5 @@
-from DREEM_Herschlag.get_info import get_attributes
-from DREEM_Herschlag.util import Path, format_path
+from dreem_herschlag.get_info import get_attributes
+from dreem_herschlag.util import Path, format_path
 import os
 
 class TemplateGenerator(object):

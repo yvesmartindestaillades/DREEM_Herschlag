@@ -1,4 +1,4 @@
-from DREEM_Herschlag.util import Path
+from dreem_herschlag.util import Path
 import yaml
 
 def get_attributes(file, type='txt'):

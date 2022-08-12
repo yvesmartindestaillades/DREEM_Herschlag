@@ -1,5 +1,5 @@
-from DREEM_Herschlag.util import run_command
-from DREEM_Herschlag.sanity_check import Sanity_check
+from dreem_herschlag.util import run_command
+from dreem_herschlag.sanity_check import Sanity_check
 
 
 class Run_dreem(object):

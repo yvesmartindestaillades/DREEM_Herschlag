@@ -14,7 +14,7 @@
 #     |- ...
 
 path_to_data: /Users/ymdt/src/DREEM_Herschlag/test/resources/  
-
+fastq_zipped: False
 
 # The samples that you want to process today
 # ------------------------------------------
