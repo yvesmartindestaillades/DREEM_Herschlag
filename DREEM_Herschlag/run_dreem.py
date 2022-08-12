@@ -12,6 +12,7 @@ class Run_dreem(object):
         self.verbose = config['verbose']
         self.fastq_zipped = config['fastq_zipped']
         self.fasta_file = Sanity_check(config).find_fasta()
+        self.config = config
 
     def run(self):
         if self.verbose: print(f"Running DREEM")
@@ -22,8 +23,10 @@ class Run_dreem(object):
 
             cmd += ' -fa '+self.fasta_file
             cmd += ' --sample '+s
-            cmd += ' --sample_info '+self.sample_file
-            cmd += ' --library_info '+self.library_file
+            if not self.config['skip_library']:
+                cmd += ' --library_info '+self.library_file
+            if not self.config['skip_samples']:
+                cmd += ' --sample_info '+self.sample_file
 
             for key, val in self.dreem_args.items():
                 if (not (type(val) == bool)) or val:
