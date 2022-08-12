@@ -108,17 +108,17 @@ transfered mh.p to mh_only/case_1
 Your fasta/fastq files organization should look like this:
 
 ```
-|- /path/to/data
+|- /[path_to_data]
      |- samples.csv
-     |- /your_sample_1
-          |- r1.fastq
-          |- r2.fastq
-          |- ref.fasta
-          |- library.csv
-     |- /your_sample_2
-          |- ...
-     |- /your_sample_3
-          |- ...
+     |- library.csv
+     |- [some name].fasta
+     |- [your_sample_1]_R1_001.fastq.gz
+     |- [your_sample_1]_R2_001.fastq.gz
+     |- [your_sample_2]_R1_001.fastq.gz
+     |- [your_sample_2]_R2_001.fastq.gz
+     |- [your_sample_3]_R1_001.fastq.gz
+     |- [your_sample_3]_R2_001.fastq.gz
+     |- ...
 ```
 
 ### Write additional experimental information files

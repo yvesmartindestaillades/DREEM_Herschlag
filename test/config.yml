@@ -14,14 +14,12 @@
 #          |- ...
 #     |- ...
 
-path_to_data: test/resources/  
+path_to_data: test/resources/
 
-# it's not recommanded to change this
-files_per_sample:
-  - r1.fastq
-  - r2.fastq
-  - ref.fasta
-  - library.csv
+
+# Do you use .fastq or .fastq.gz format?
+fastq_zipped: False  # False: .fastq, True: .fastq.gz 
+
 
 # The samples that you want to process today
 # ------------------------------------------
@@ -43,7 +41,7 @@ dreem_args:
     overwrite: True     # Re-compute the bitvector if it already exists. Takes more time.
    # RNAstructure_path: /Users/ymdt/src/RNAstructure/exe  # where RNAstructure/exe is located on your computer. Remove if you don't want to run RNAstructure
     temperature: False  # Use samples.csv col 'temperature_k' as an input for RNAstructure
-    bootstrap: False     # Run bootstrap
+    poisson: False     # Run Poisson
 
 # Print more information during run time
 verbose: True

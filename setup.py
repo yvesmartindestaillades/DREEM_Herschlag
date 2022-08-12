@@ -17,7 +17,7 @@ if sys.version_info < PYTHON_VERSION:
 
 setup(
    name='dreem_herschlag',
-   version='''1.0.3''',
+   version='''1.1.0''',
    license="MIT",
    description='A wrapper for DREEM for the Herschlag lab',
    author='Yves Martin des Taillades',
@@ -28,10 +28,12 @@ setup(
    packages=find_packages(),
    package_data={'': ['*.yml']},
    py_modules=[
-       'DREEM_Herschlag/sanity_check',
-       'DREEM_Herschlag/run_dreem',
-       'DREEM_Herschlag/run',
-       'DREEM_Herschlag/util',
+         'DREEM_Herschlag/sanity_check',
+         'DREEM_Herschlag/run_dreem',
+         'DREEM_Herschlag/run',
+         'DREEM_Herschlag/util',
+         'DREEM_Herschlag/template',
+         'DREEM_Herschlag/get_info',
    ],
    include_package_data=True,
    install_requires=requirements, #external packages as dependencies

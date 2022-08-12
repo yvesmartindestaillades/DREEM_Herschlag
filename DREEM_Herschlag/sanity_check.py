@@ -2,25 +2,39 @@
 import pandas as pd
 import os
 import yaml
-from DREEM_Herschlag.util import Path
+from DREEM_Herschlag.util import Path, run_command
 
 
 class Sanity_check(object):
     def __init__(self, config) -> None:
         self.samples = config['samples']
-        self.files_per_sample = config['files_per_sample']
         self.path_to_data = config['path_to_data'] if config['path_to_data'][-1] == '/' else config['path_to_data'] + '/'
         self.sample_file = self.path_to_data+'samples.csv'
+        self.library_file = self.path_to_data+'library.csv'
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
+        self.fastq_zipped = config['fastq_zipped']
         self.path = Path()
 
     def files(self):
         # check that every file is there
         for s in self.samples:
-            for f in self.files_per_sample:
-                assert os.path.exists(self.path_to_data+s+'/'+f), f"{self.path_to_data}{s}/{f} doesn't exist"
-        assert os.path.exists(self.sample_file), f"{self.sample_file} doesn't exist"
+            for f in [x + '.gz' if self.fastq_zipped else x for x in ['_R1_001.fastq', '_R2_001.fastq']]:
+                assert os.path.exists(self.path_to_data+s+f), f"{self.path_to_data+s+f} not found"
+        assert os.path.exists(self.library_file), f"{self.library_file} not found"        
+        assert os.path.exists(self.sample_file), f"{self.sample_file} not found"
+        assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
+        print('Found fasta_file '+fasta)
+
+    def find_fasta(self):
+        cmd = 'find '+self.path_to_data+' -name "*.fasta" -type f'
+        output, error_msg = run_command(cmd)
+        if error_msg:
+            print(error_msg)
+            return None
+        else:
+            assert len(output[:-1].split('\n')) < 2, 'Found more than one fasta file'
+            return output.split('\n')[0].replace('//','/')
 
     def check_samples(self):
         if self.verbose: print(f"Checking {self.sample_file}")
@@ -47,7 +61,6 @@ class Sanity_check(object):
         # check that every mandatory column of samples.csv is not empty for every sample
         for mand in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env]:
             for s in self.samples:
-                print(df[df['sample']==s][mand])
                 assert df[df['sample']==s][mand].isnull().sum() == 0, f"{mand} is empty in samples.csv for sample {s}"
             
         # Drop unauthorised columns
@@ -62,19 +75,19 @@ class Sanity_check(object):
         if self.verbose: print('Checking samples.csv done\n')
         return 1
 
-    def check_library(self,s):
+    def check_library(self):
         # check the sanity of libraries.csv
-        if self.verbose: print(f"Checking {s}/library.csv")
-        df = pd.read_csv(self.path_to_data+s+'/library.csv')
+        if self.verbose: print(f"Checking library.csv")
+        df = pd.read_csv(self.library_file)
         assert 'name' in list(df.columns), "name is not in library.csv"
-        assert len(df['name']) == len(df['name'].unique()), f"Every name isn't unique in {s}/library.csv"
+        assert len(df['name']) == len(df['name'].unique()), f"Every name isn't unique in library.csv"
         with open(self.path.library_attributes_path, 'r') as f:
             library_attributes = yaml.safe_load(f)
         # check that every mandatory column is there
         for mand in library_attributes['mandatory']:
-            assert mand in list(df.columns), f"{mand} is not in {s}/library.csv"
+            assert mand in list(df.columns), f"{mand} is not in library.csv"
             # check that every mandatory column of samples.csv is not empty for every sample
-            assert df[df['name'] != ''][mand].isnull().sum() == 0, f"{mand} is empty for at a least one row in {s}/library.csv"
+            assert df[df['name'] != ''][mand].isnull().sum() == 0, f"{mand} is empty for at a least one row in library.csv"
             
         
         # check that every column of libraries.csv is in resources/library_attributes.yml
@@ -82,17 +95,16 @@ class Sanity_check(object):
             if col not in library_attributes['mandatory'] + library_attributes['optional']:
                 if self.verbose: print(f"Ignored {col}, not in library_attributes")
                 df = df.drop(columns=col)
-        if not os.path.exists(f"temp/{s}"):
-            os.mkdir(f"temp/{s}")
-        df.to_csv(f"temp/{s}/library.csv", index=False)
+        if not os.path.exists(f"temp"):
+            os.mkdir(f"temp")
+        df.to_csv(f"temp/library.csv", index=False)
 
-        if self.verbose: print(f"Checking {s}/library.csv done\n")
+        if self.verbose: print(f"Checking library.csv done\n")
 
     def run(self):
         if self.verbose: print("Checking files")
         self.files()
         self.check_samples()
-        for s in self.samples:
-            self.check_library(s)
+        self.check_library()
         if self.verbose: print("Checking files done\n")
         return 1
