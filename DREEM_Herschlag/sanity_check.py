@@ -24,9 +24,9 @@ class Sanity_check(object):
                 assert os.path.exists(self.path_to_data+s+f), f"{self.path_to_data+s+f} not found"
         if not self.config['skip_library']:
             assert os.path.exists(self.library_file), f"{self.library_file} not found"        
-        assert os.path.exists(self.sample_file), f"{self.sample_file} not found"
         if not self.config['skip_samples']:
-            assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
+            assert os.path.exists(self.sample_file), f"{self.sample_file} not found"
+        assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
         print('Found fasta_file '+fasta)
 
     def find_fasta(self):

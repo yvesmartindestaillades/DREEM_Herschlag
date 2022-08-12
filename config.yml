@@ -46,9 +46,9 @@ verbose: True
 
 # There's a bunch of folders in output/. This option creates a folder such that:
 # /mh_only
-#   |- [your_sample_1]_mh.p
-#   |- [your_sample_2]_mh.p
-#   |- [your_sample_3]_mh.p
+#   |- [your_sample_1].p
+#   |- [your_sample_2].p
+#   |- [your_sample_3].p
 #   ...
 
 mut_hist_only_folder: True

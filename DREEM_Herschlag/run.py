@@ -21,7 +21,7 @@ from dreem_herschlag.add_info import AddInfo
 @click.command()
 @optgroup.group("main arguments")
 @optgroup.option("-r", "--run_dreem", is_flag=True, help="Run dreem")
-@optgroup.option("-a", "--add-info", is_flag=True, help="Add info to existing DREEM outputs")
+@optgroup.option("-a", "--add-info", help="Path to targeted DREEM outputs")
 
 @optgroup.option("-c", "--config", type=click.Path(exists=True),
                  help="reference sequences in fasta format")
@@ -51,6 +51,8 @@ def read_config(args):
     assert config['verbose'] != None, "No verbose found in config file"
     assert config['mut_hist_only_folder'] != None, "No mut_hist_only_folder found in config file"
     assert config['fastq_zipped'] != None, "No fastq_zipped found in config file"
+    for arg in ['skip_library', 'skip_samples','add_info']:
+        config[arg] = args[arg]
     return config
 
 def make_dirs():
@@ -80,5 +82,5 @@ def run(args):
        
 
 if __name__ == "__main__":
-    sys.argv = ['run.py', '-c','config.yml','-r']
+    sys.argv = ['run.py', '-c','config.yml','-a','output_mh_only', '--skip_samples']
     main()
