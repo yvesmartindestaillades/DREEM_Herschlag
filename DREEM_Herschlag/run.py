@@ -1,3 +1,5 @@
+#!/usr/bin/env python 
+
 from email.policy import default
 import click
 from click_option_group import optgroup
@@ -27,6 +29,9 @@ from dreem_herschlag.add_info import AddInfo
 @optgroup.option("--samples_info", is_flag=True, help="Print the mandatory and optional columns for samples.csv")
 @optgroup.option("--library_info", is_flag=True, help="Print the mandatory and optional columns for library.csv")
 @optgroup.option("--generate_templates", default=None, help="Path to generate templates for samples.csv (in_vivo and in_vitro) and library.csv")
+@optgroup.option("--skip_library",is_flag=True, default=False, help="Don't use library.csv")
+@optgroup.option("--skip_samples",is_flag=True, default=False, help="Don't use samples.csv")
+
 
 def main(**args):
     """
@@ -59,7 +64,7 @@ def run(args):
     if args['library_info']:
         echo_attributes_library()
     if args['generate_templates'] != None:
-        temp = TemplateGenerator(args['generate_templates']).run()
+        TemplateGenerator(args['generate_templates']).run()
     if args['samples_info'] or args['library_info'] or args['generate_templates'] != None:
         exit()
     else:
@@ -68,12 +73,12 @@ def run(args):
         Sanity_check(config).run()
         if args['run_dreem']:
             Run_dreem(config).run()
+            if config['mut_hist_only_folder']:
+                generate_mh_only_folder(config['samples'])
         if args['add_info']:
             AddInfo(config).run()
-        if config['mut_hist_only_folder']:
-            generate_mh_only_folder(config['samples'])
-
+       
 
 if __name__ == "__main__":
-    sys.argv = ['run.py', '-c','template_config.yml']
+    sys.argv = ['run.py', '-c','config.yml','-r']
     main()

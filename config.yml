@@ -26,7 +26,7 @@ fastq_zipped: False
 
 samples:
   - case_1
- # - case_2
+  - case_2
 
 
 # The arguments to pass direcly to DREEM

@@ -15,15 +15,18 @@ class Sanity_check(object):
         self.verbose = config['verbose']
         self.fastq_zipped = config['fastq_zipped']
         self.path = Path()
+        self.config = config
 
     def files(self):
         # check that every file is there
         for s in self.samples:
             for f in [x + '.gz' if self.fastq_zipped else x for x in ['_R1_001.fastq', '_R2_001.fastq']]:
                 assert os.path.exists(self.path_to_data+s+f), f"{self.path_to_data+s+f} not found"
-        assert os.path.exists(self.library_file), f"{self.library_file} not found"        
+        if not self.config['skip_library']:
+            assert os.path.exists(self.library_file), f"{self.library_file} not found"        
         assert os.path.exists(self.sample_file), f"{self.sample_file} not found"
-        assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
+        if not self.config['skip_samples']:
+            assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
         print('Found fasta_file '+fasta)
 
     def find_fasta(self):
@@ -104,7 +107,9 @@ class Sanity_check(object):
     def run(self):
         if self.verbose: print("Checking files")
         self.files()
-        self.check_samples()
-        self.check_library()
+        if not self.config['skip_samples']:
+            self.check_samples()
+        if not self.config['skip_library']:
+            self.check_library()
         if self.verbose: print("Checking files done\n")
         return 1
