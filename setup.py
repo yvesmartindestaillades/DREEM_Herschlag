@@ -1,6 +1,7 @@
 from distutils.core import setup
 from setuptools import find_packages
 import os, sys
+from dreem_herschlag import __version__
 
 try:
     with open('/Users/ymdt/src/DREEM_Herschlag/requirements.txt') as f:
@@ -17,7 +18,7 @@ if sys.version_info < PYTHON_VERSION:
 
 setup(
    name='dreem_herschlag',
-   version='''1.1.0''',
+   version= __version__,
    license="MIT",
    description='A wrapper for DREEM for the Herschlag lab',
    author='Yves Martin des Taillades',

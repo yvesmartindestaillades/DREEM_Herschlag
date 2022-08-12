@@ -1,6 +1,6 @@
 
-from DREEM_Herschlag.resources import __file__ as resources_file
-from DREEM_Herschlag import __file__ as DREEM_Herschlag_file
+from dreem_herschlag.resources import __file__ as resources_file
+from dreem_herschlag import __file__ as DREEM_Herschlag_file
 import yaml, os, subprocess
 
 class Path(object):
@@ -30,11 +30,3 @@ def format_path(path):
         os.makedirs(path)
     return path
 
-def generate_mh_only_folder(samples):
-    if not os.path.exists('mh_only'):
-        os.mkdir('mh_only')
-    for s in samples:
-        if not os.path.exists('mh_only/'+s):
-            os.mkdir('mh_only/'+s)
-            os.system(f"cp output/{s}/BitVector_Files/mh.p mh_only/{s}/mh.p")
-        print(f"transfered mh.p to mh_only/{s}")
