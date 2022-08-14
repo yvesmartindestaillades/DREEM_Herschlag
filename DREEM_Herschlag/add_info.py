@@ -5,18 +5,6 @@ class AddInfo(object):
     def __init__(self, config) -> None:
         self.samples = config['samples']
         self.config = config
-
-    def load_pickle(self, path):
-        pass
-
-    def save_pickle(self, path, obj):
-        pass
-
-    def load_samples(self, s):
-        pass
-
-    def load_library(self, path):
-        pass
     
     def run(self):
         if not self.config['skip_samples']:
@@ -41,4 +29,3 @@ class AddInfo(object):
                             print( f"{name} not found in library.csv for col {col}")
                         setattr(mh,col,data)
             pickle.dump(pf, open(self.config['add_info'] + s +'.p', 'wb'))
-        print(pf[list(pf.keys())[0]].__dict__)

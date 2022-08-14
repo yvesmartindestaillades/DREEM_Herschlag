@@ -3,12 +3,15 @@ path = os.path.dirname('/'.join(os.path.abspath(__file__).split('/')))
 sys.path.append(path)
 
 import pandas as pd
+import pickle
 
-df = pd.read_csv('/Users/ymdt/src/dreem_herschlag/data/library.csv')
-print(df)
+d = pickle.load(open('/Users/ymdt/src/DREEM_Herschlag/data/H2.p', 'rb'))
 
-df['name'] = df['name'].astype(str).apply(lambda x: "'{}'".format(x))
+for s,q in d['5091'].__dict__.items():
+    print('5091')
+    print(s,q)
 
-print(df)
-
-df.to_csv('/Users/ymdt/src/dreem_herschlag/data/library.csv', index=False)
+for s,q in d['5092'].__dict__.items():
+    print('5092')
+    print(s,q)
+exit()

@@ -1,6 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/ymdt/src/DREEM_Herschlag'
-pip3 uninstall DREEM_Herschlag -y
+make: Entering directory `/Users/ymdt/src/dreem_herschlag'
+pip3 uninstall dreem_herschlag -y
 pip3 install .
-make: Leaving directory `/Users/ymdt/src/DREEM_Herschlag'
+make: Leaving directory `/Users/ymdt/src/dreem_herschlag'
  

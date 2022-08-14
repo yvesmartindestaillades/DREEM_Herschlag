@@ -18,6 +18,7 @@ mandatory:
     - DMS_date_opened # DMS date opened
     - TGIRT_lot # TGIRT lot # 
     - polymerase_lot # Polymerase and lot # 
+    - utr_3_or_5 # utr 3 or utr 5
     - exp_env # Experimental environment, in_vivo or in_vitro
 
     # Library prep and sequencing:

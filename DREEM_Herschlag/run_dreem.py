@@ -33,5 +33,5 @@ class Run_dreem(object):
                     cmd += ' --'+ key + ' '+ (str(val) if type(val) != bool else '')
 
             if self.verbose: print(cmd)
-            [print(out) for out in run_command(cmd)] if self.verbose else self._run_command(cmd)
+            [print(out) for out in run_command(cmd)] if self.verbose else run_command(cmd)
         if self.verbose: print('DREEM done\n')
