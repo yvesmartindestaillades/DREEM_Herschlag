@@ -46,6 +46,12 @@ class TemplateGenerator(object):
             f.close()
         print(f"{self.path}template_config.yml")
 
+    def generate_studies_template(self):
+        with open(self.path+'template_studies.yml','w') as f:
+            f.write('name,description,samples,conditions,title\n\n')
+            f.close()
+        print(f"{self.path}template_studies.yml")
+
     def run(self):
         print("Generating templates...")
         self.generate_template_samples('in_vivo')
