@@ -20,7 +20,7 @@ if sys.version_info < PYTHON_VERSION:
 
 setup(
    name='dreem_herschlag',
-   version= '1.1.2',
+   version= '1.1.3',
    license="MIT",
    description='A wrapper for DREEM for the Herschlag lab',
    author='Yves Martin des Taillades',

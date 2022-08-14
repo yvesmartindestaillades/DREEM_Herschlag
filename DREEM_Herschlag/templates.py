@@ -50,7 +50,7 @@ class TemplateGenerator(object):
         with open(self.path+'template_studies.yml','w') as f:
             f.write('name,description,samples,conditions,title\n\n')
             f.close()
-        print(f"{self.path}template_studies.yml")
+        print(f"{self.path}template_studies.csv")
 
     def run(self):
         print("Generating templates...")
@@ -58,3 +58,4 @@ class TemplateGenerator(object):
         self.generate_template_samples('in_vitro')
         self.generate_template_library()
         self.generate_config_template()
+        self.generate_studies_template()
