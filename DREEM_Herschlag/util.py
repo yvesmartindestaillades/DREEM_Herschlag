@@ -1,12 +1,14 @@
 
 from dreem_herschlag.resources import __file__ as resources_file
-from dreem_herschlag import __file__ as DREEM_Herschlag_file
+from dreem_herschlag import __file__ as dreem_herschlag_file
 import yaml, os, subprocess
+import string
+import random
 
 class Path(object):
     def __init__(self) -> None:    
         self.resources_file = '/'.join(resources_file.split('/')[:-1])
-        self.DREEM_Herschlag_file = '/'.join(DREEM_Herschlag_file.split('/')[:-1])
+        self.dreem_herschlag_file = '/'.join(dreem_herschlag_file.split('/')[:-1])
         self.sample_attribute_path = self.resources_file+'/sample_attributes.yml'
         self.library_attributes_path = self.resources_file+'/library_attributes.yml'
         self.config_template = self.resources_file+'/config-template.yml'
@@ -30,3 +32,9 @@ def format_path(path):
         os.makedirs(path)
     return path
 
+
+def get_random_string(length):
+    # With combination of lower and upper case
+    result_str = ''.join([random.choice(string.ascii_letters) for i in range(length)])
+    # return random string
+    return result_str

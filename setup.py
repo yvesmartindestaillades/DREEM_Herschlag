@@ -4,7 +4,7 @@ import os, sys
 from dreem_herschlag import __version__
 
 try:
-    with open('/Users/ymdt/src/DREEM_Herschlag/requirements.txt') as f:
+    with open('/Users/ymdt/src/dreem_herschlag/requirements.txt') as f:
         requirements = f.read().splitlines()
 except:
     with open('../requirements.txt') as f:
@@ -24,24 +24,24 @@ setup(
    author='Yves Martin des Taillades',
    author_email='yves@martin.yt',
    long_description= 'TODO',
- #  packages=['DREEM_Herschlag'],  #same as name
-   package_dir={'DREEM_Herschlag': 'DREEM_Herschlag'},
+ #  packages=['dreem_herschlag'],  #same as name
+   package_dir={'dreem_herschlag': 'dreem_herschlag'},
    packages=find_packages(),
    package_data={'': ['*.yml']},
    py_modules=[
-         'DREEM_Herschlag/sanity_check',
-         'DREEM_Herschlag/run_dreem',
-         'DREEM_Herschlag/run',
-         'DREEM_Herschlag/util',
-         'DREEM_Herschlag/template',
-         'DREEM_Herschlag/get_info',
+         'dreem_herschlag/sanity_check',
+         'dreem_herschlag/run_dreem',
+         'dreem_herschlag/run',
+         'dreem_herschlag/util',
+         'dreem_herschlag/template',
+         'dreem_herschlag/get_info',
    ],
    include_package_data=True,
    install_requires=requirements, #external packages as dependencies
     entry_points = {
         'console_scripts' : [
-            'dreem_herschlag = DREEM_Herschlag.run : main'
+            'dreem_herschlag = dreem_herschlag.run : main'
             ]
     },
-    url='https://github.com/yvesmartindestaillades/DREEM_Herschlag'
+    url='https://github.com/yvesmartindestaillades/dreem_herschlag'
 )

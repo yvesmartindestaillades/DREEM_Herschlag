@@ -1,7 +1,7 @@
-DOCKER_IMAGE := ydmt/DREEM_Herschlag
+DOCKER_IMAGE := ydmt/dreem_herschlag
 VERSION := $(shell git describe --always --dirty --long)
 default:
-	pip3 uninstall DREEM_Herschlag -y
+	pip3 uninstall dreem_herschlag -y
 	pip3 install .
 	
 init:
@@ -17,7 +17,7 @@ upgrade-dependencies:
 	pip-compile -U requirements.in > requirements.txt
 
 push_to_pypi:
-	pip3 uninstall DREEM_Herschlag -y
+	pip3 uninstall dreem_herschlag -y
 	pip3 install .
 	rm -fr dist
 	python3 -m build

@@ -11,7 +11,7 @@ You need RNAstructure installed to run RNAstructure, otherwise deactivate this o
 
 ## Installation
 
-DREEM_Herschlag is available on PyPi:
+dreem_herschlag is available on PyPi:
 
 ```
 pip install dreem_herschlag
@@ -21,8 +21,8 @@ You can also clone this repo and run make:
 
 ```
 cd [PATH_TO_WHERE_YOU_WANT_THE_REPO]
-git clone https://github.com/yvesmartindestaillades/DREEM_Herschlag
-cd DREEM_Herschlag
+git clone https://github.com/yvesmartindestaillades/dreem_herschlag
+cd dreem_herschlag
 make init
 ```
 
@@ -55,7 +55,7 @@ Checking files done
 Running DREEM
 dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --overwrite 
 [19:27 bit_vector.py run] INFO ran at commandline as: 
-[19:27 bit_vector.py run] INFO /Users/ymdt/src/DREEM_Herschlag/bin/dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --overwrite
+[19:27 bit_vector.py run] INFO /Users/ymdt/src/dreem_herschlag/bin/dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -fa test/resources/case_1/ref.fasta --sample case_1 --sample_info temp/samples.csv --library_info temp/case_1/library.csv --overwrite
 [19:27 bit_vector.py validate_files] INFO fasta file: test/resources/case_1/ref.fasta exists
 [19:27 bit_vector.py validate_files] INFO fastq file: test/resources/case_1/r1.fastq exists
 [19:27 bit_vector.py validate_files] INFO fastq2 file: test/resources/case_1/r2.fastq exists

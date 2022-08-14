@@ -16,6 +16,7 @@ from dreem_herschlag.get_info import echo_attributes_samples, echo_attributes_li
 from dreem_herschlag.templates import TemplateGenerator
 from dreem_herschlag.generate_mh_only import generate_mh_only_folder
 from dreem_herschlag.add_info import AddInfo
+from dreem_herschlag.util import get_random_string
 
 
 @click.command()
@@ -51,8 +52,9 @@ def read_config(args):
     assert config['verbose'] != None, "No verbose found in config file"
     assert config['mut_hist_only_folder'] != None, "No mut_hist_only_folder found in config file"
     assert config['fastq_zipped'] != None, "No fastq_zipped found in config file"
-    for arg in ['skip_library', 'skip_samples','add_info']:
+    for arg in ['skip_library', 'skip_samples','add_info','run_dreem']:
         config[arg] = args[arg]
+    config['temp_folder'] = 'temp/'+ get_random_string(5)
     return config
 
 def make_dirs():
@@ -82,5 +84,5 @@ def run(args):
        
 
 if __name__ == "__main__":
-    sys.argv = ['run.py', '-c','config.yml','-a','output_mh_only', '--skip_samples']
+    sys.argv = ['run.py', '-c','config.yml','-a','/Users/ymdt/src/dreem_herschlag/data/', '--skip_samples']
     main()

@@ -6,8 +6,8 @@ class Run_dreem(object):
     def __init__(self, config) -> None:
         self.samples = config['samples']
         self.path_to_data = config['path_to_data']
-        self.sample_file = 'temp/samples.csv'
-        self.library_file = 'temp/library.csv'
+        self.sample_file =  config['temp_folder']+'/samples.csv'
+        self.library_file = config['temp_folder']+'/library.csv'
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
         self.fastq_zipped = config['fastq_zipped']

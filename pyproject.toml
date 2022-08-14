@@ -3,6 +3,6 @@ requires = ["setuptools<61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "DREEM_Herschlag"
+name = "dreem_herschlag"
 authors = [{name = "Yves Martin des Taillades", email = "yves@martin.yt"}]
 dynamic = ["version", "description"]

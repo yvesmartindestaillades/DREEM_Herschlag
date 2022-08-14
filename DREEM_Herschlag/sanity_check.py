@@ -19,15 +19,20 @@ class Sanity_check(object):
 
     def files(self):
         # check that every file is there
-        for s in self.samples:
-            for f in [x + '.gz' if self.fastq_zipped else x for x in ['_R1_001.fastq', '_R2_001.fastq']]:
-                assert os.path.exists(self.path_to_data+s+f), f"{self.path_to_data+s+f} not found"
+        if self.config['run_dreem']:
+            assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
+            print('Found fasta_file '+fasta)
+            for s in self.samples:
+                for f in [x + '.gz' if self.fastq_zipped else x for x in ['_R1_001.fastq', '_R2_001.fastq']]:
+                    assert os.path.exists(self.path_to_data+s+f), f"{self.path_to_data+s+f} not found"
+        if self.config['add_info']:
+            for s in self.samples:
+                assert os.path.exists(self.path_to_data+s+'.p'), f"{self.path_to_data+s+'.p'} not found"
         if not self.config['skip_library']:
             assert os.path.exists(self.library_file), f"{self.library_file} not found"        
         if not self.config['skip_samples']:
             assert os.path.exists(self.sample_file), f"{self.sample_file} not found"
-        assert len(fasta :=self.find_fasta()) > 0, "No fasta found"
-        print('Found fasta_file '+fasta)
+
 
     def find_fasta(self):
         cmd = 'find '+self.path_to_data+' -name "*.fasta" -type f'
@@ -74,7 +79,7 @@ class Sanity_check(object):
                     if self.verbose: print(f"Ignored {col}, not in sample_attributes")
                     df = df.drop(columns=col)
 
-        df.to_csv('temp/samples.csv', index=False)
+        df.to_csv(self.config['temp_folder']+'/samples.csv', index=False)
         if self.verbose: print('Checking samples.csv done\n')
         return 1
 
@@ -98,18 +103,18 @@ class Sanity_check(object):
             if col not in library_attributes['mandatory'] + library_attributes['optional']:
                 if self.verbose: print(f"Ignored {col}, not in library_attributes")
                 df = df.drop(columns=col)
-        if not os.path.exists(f"temp"):
-            os.mkdir(f"temp")
-        df.to_csv(f"temp/library.csv", index=False)
+        if not os.path.exists( self.config['temp_folder']):
+            os.makedirs( self.config['temp_folder'])
+        df.to_csv(f"{self.config['temp_folder']}/library.csv", index=False)
 
         if self.verbose: print(f"Checking library.csv done\n")
 
     def run(self):
         if self.verbose: print("Checking files")
         self.files()
-        if not self.config['skip_samples']:
-            self.check_samples()
         if not self.config['skip_library']:
             self.check_library()
+        if not self.config['skip_samples']:
+            self.check_samples()
         if self.verbose: print("Checking files done\n")
         return 1

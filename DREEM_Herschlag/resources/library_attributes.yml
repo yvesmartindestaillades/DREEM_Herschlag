@@ -4,3 +4,8 @@ optional:
   - flank
   - ROI_start  # 0-indexed
   - ROI_stop   # 0-index
+  - sub-library
+  - structure
+  - base_pairing_prob
+  - deltaG_ROI
+  - deltaG

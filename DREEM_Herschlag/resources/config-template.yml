@@ -13,7 +13,7 @@
 #     |- [your_sample_3]_R2_001.fastq.gz
 #     |- ...
 
-path_to_data: /Users/ymdt/src/DREEM_Herschlag/test/resources/  
+path_to_data: /Users/ymdt/src/dreem_herschlag/test/resources/  
 fastq_zipped: False
 
 # The samples that you want to process today

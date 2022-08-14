@@ -44,3 +44,14 @@ output
 temp
 
 lib
+data
+*.pyc
+*.pyo
+*.egg-info
+build
+dist
+__pycache__
+*.zip
+*.tar.gz
+*.tar.bz2
+*.p
