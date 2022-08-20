@@ -12,7 +12,6 @@ class TemplateGenerator(object):
             self.path = path if path[-1] == '/' else path+'/'
         if not os.path.exists(path):
             os.makedirs(path)
-        print(self.path)
 
     def _write_cols_to_csv(self, file,all_cols):
         chain = ''

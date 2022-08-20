@@ -28,9 +28,9 @@ class Sanity_check(object):
         if self.config['add_info']:
             for s in self.samples:
                 assert os.path.exists(self.path_to_data+s+'.p'), f"{self.path_to_data+s+'.p'} not found"
-        if not self.config['skip_library']:
+        if self.config['use_library']:
             assert os.path.exists(self.library_file), f"{self.library_file} not found"        
-        if not self.config['skip_samples']:
+        if self.config['use_samples']:
             assert os.path.exists(self.sample_file), f"{self.sample_file} not found"
 
 
@@ -51,8 +51,11 @@ class Sanity_check(object):
         assert len(df['sample']) == len(df['sample'].unique()), "Every line isn't unique in samples.csv"
 
         # check that every sample as a corresponding line of samples.csv
+        df['sample'] = df['sample'].astype(str)
+        print(df['sample'])
+        print(self.samples)
         for s in self.samples:
-            assert s in list(df['sample']), f"{s} doesn't have a corresponding line in samples.csv"
+            assert s in list(df['sample']), f"{s, type(s)} doesn't have a corresponding line in samples.csv"
 
         with open(self.path.sample_attribute_path, 'r') as f:
             sample_attributes = yaml.safe_load(f)
@@ -112,9 +115,9 @@ class Sanity_check(object):
     def run(self):
         if self.verbose: print("Checking files")
         self.files()
-        if not self.config['skip_library']:
+        if self.config['use_library']:
             self.check_library()
-        if not self.config['skip_samples']:
+        if self.config['use_samples']:
             self.check_samples()
         if self.verbose: print("Checking files done\n")
         return 1

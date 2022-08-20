@@ -13,7 +13,8 @@
 #     |- [your_sample_3]_R2_001.fastq.gz
 #     |- ...
 
-path_to_data: /Users/ymdt/src/dreem_herschlag/data/  
+path_to_data: /Users/ymdt/src/data/Lauren 
+path_to_RNAstructure: /Users/ymdt/src/RNAstructure/exe
 fastq_zipped: False
 
 # The samples that you want to process today
@@ -25,90 +26,28 @@ fastq_zipped: False
 # Nota bene: obviously, the name of your data folders must match the sample column of samples.csv
 
 samples:
-- E9
-- G6
-- A3
-- E3
-- C8
-- C2
-- C6
-- E7
-- G8
-- A7
-- A9
-- G2
-- B6
-- A10
-- D7
-- F8
-- F2
-- H5
-- F6
-- B10
-- H1
-- B8
-- D3
-- D9
-- B2
-- C1
-- G5
-- A4
-- G1
-- C5
-- E4
-- F1
-- H6
-- B5
-- D4
-- B1
-- F5
-- H2
-- H8
-- E1
-- A5
-- G4
-- A1
-- E5
-- C4
-- H7
-- D5
-- B4
-- D1
-- H9
-- H3
-- F4
-- A6
-- G7
-- E8
-- E2
-- C9
-- E6
-- C7
-- G3
-- A8
-- A2
-- G9
-- D6
-- B7
-- H4
-- F3
-- F9
-- F7
-- B3
-- D8
-- D2
-- B9
+- 470
+- 471
+- 472
+- 473
+- 474
+- 475
+# - [your_sample_1]
+# - [your_sample_2]
+# - [your_sample_3]
+
 
 # The arguments to pass direcly to DREEM
 # --------------------------------------
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
 
 dreem_args:
-    overwrite: False             # Re-compute the bitvector if it already exists. Takes more time.
-   # RNAstructure_path:          # where RNAstructure/exe is located on your computer. Remove if you don't want to run RNAstructure
-    temperature: False           # Use samples.csv col 'temperature_k' as an input for RNAstructure
-    poisson: True                # Add Poisson confidence interval
-
+    overwrite: False                # Re-compute the bitvector if it already exists. Takes more time.
+    RNAstructure: False             # True if you want to run RNAstructure with DREEM (then fill-in RNAstructure_path above!!)
+    temperature: False              # Use samples.csv col 'temperature_k' as an input for RNAstructure
+    poisson: True                   # Add Poisson confidence interval
+    library: True                   # Use library.csv
+    samples: True                   # Use samples.csv
 
 # Print more information during run time
 verbose: True
@@ -122,3 +61,16 @@ verbose: True
 #   ...
 
 mut_hist_only_folder: True
+
+## RUN ARGS
+# MODE: can be run_dreem or add_info.
+# run_dreem: run DREEM 
+# add_info: add data to targeted DREEM outputs
+mode: add_info 
+
+# USE: uncomment what you want to use
+use_with_mode_add_info:
+#- library # Don't use library.csv with add_info mode
+#- samples # Don't use samples.csv with add_info mode
+- rnastructure # Don't add RNAstructure with add_info mode
+

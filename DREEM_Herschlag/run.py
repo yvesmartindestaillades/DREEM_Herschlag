@@ -21,17 +21,13 @@ from dreem_herschlag.util import get_random_string
 
 @click.command()
 @optgroup.group("main arguments")
-@optgroup.option("-r", "--run_dreem", is_flag=True, help="Run dreem")
-@optgroup.option("-a", "--add-info", help="Path to targeted DREEM outputs")
-
 @optgroup.option("-c", "--config", type=click.Path(exists=True),
                  help="reference sequences in fasta format")
-
 @optgroup.option("--samples_info", is_flag=True, help="Print the mandatory and optional columns for samples.csv")
 @optgroup.option("--library_info", is_flag=True, help="Print the mandatory and optional columns for library.csv")
 @optgroup.option("--generate_templates", default=None, help="Path to generate templates for samples.csv (in_vivo and in_vitro) and library.csv")
-@optgroup.option("--skip_library",is_flag=True, default=False, help="Don't use library.csv")
-@optgroup.option("--skip_samples",is_flag=True, default=False, help="Don't use samples.csv")
+
+
 
 
 def main(**args):
@@ -40,7 +36,6 @@ def main(**args):
     profiles that relate to DMS modification rates written by Silvi Rouskin and the
     Rouskin lab (https://www.rouskinlab.com/)
     """
-    print(args)
     run(args)
 
 def read_config(args):
@@ -52,9 +47,22 @@ def read_config(args):
     assert config['verbose'] != None, "No verbose found in config file"
     assert config['mut_hist_only_folder'] != None, "No mut_hist_only_folder found in config file"
     assert config['fastq_zipped'] != None, "No fastq_zipped found in config file"
-    for arg in ['skip_library', 'skip_samples','add_info','run_dreem']:
-        config[arg] = args[arg]
-    config['temp_folder'] = 'temp/'+ get_random_string(5)
+    if config['mode']=='add_info':
+        if config['use_with_mode_add_info']!=None:
+            for use in config['use_with_mode_add_info']:
+                config['use_'+use] = True
+    if config['mode']=='run_dreem':
+        config['use_samples'] = config['dreem_args']['samples']
+        config['use_library'] = config['dreem_args']['library']
+    
+    config[config['mode']] = True
+    config['temp_folder'] = 'temp/'
+    config['samples'] = [str(s) for s in config['samples']]
+    config['path_to_data'] = config['path_to_data']+'/' if config['path_to_data'][-1]!= '/' else config['path_to_data']
+    
+    for attr in ['use_samples','use_library','use_rnastructure','run_dreem','add_info']:
+        if not attr in config:
+            config[attr]=False
     return config
 
 def make_dirs():
@@ -75,14 +83,16 @@ def run(args):
         config = read_config(args)
         make_dirs()
         Sanity_check(config).run()
-        if args['run_dreem']:
+        if config['run_dreem']:
+            print('Starting running DREEM')
             Run_dreem(config).run()
             if config['mut_hist_only_folder']:
                 generate_mh_only_folder(config['samples'])
-        if args['add_info']:
+        if config['add_info']:
+            print('Starting add_info')
             AddInfo(config).run()
-       
+        print('Done!')
 
 if __name__ == "__main__":
-    sys.argv = ['run.py', '-c','config.yml','-a','/Users/ymdt/src/dreem_herschlag/data/', '--skip_samples']
+    sys.argv = ['run.py', '-c','config.yml']
     main()

@@ -5,13 +5,14 @@ sys.path.append(path)
 import pandas as pd
 import pickle
 
-d = pickle.load(open('/Users/ymdt/src/DREEM_Herschlag/data/H2.p', 'rb'))
+d = pickle.load(open('/Users/ymdt/src/data/Lauren/470.p', 'rb'))
 
-for s,q in d['5091'].__dict__.items():
-    print('5091')
+for name, mh in d.items():
+    print(name)
+
+for s,q in d['3407-O-flank_1=lp5-DB'].__dict__.items():
     print(s,q)
 
-for s,q in d['5092'].__dict__.items():
-    print('5092')
+for s,q in d['3407-O-flank_1=lp5-DB'].__dict__.items():
     print(s,q)
 exit()

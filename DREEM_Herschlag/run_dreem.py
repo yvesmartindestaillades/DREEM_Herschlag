@@ -23,12 +23,14 @@ class Run_dreem(object):
 
             cmd += ' -fa '+self.fasta_file
             cmd += ' --sample '+s
-            if not self.config['skip_library']:
+            if self.config['use_library']:
                 cmd += ' --library_info '+self.library_file
-            if not self.config['skip_samples']:
+            if self.config['use_samples']:
                 cmd += ' --sample_info '+self.sample_file
 
             for key, val in self.dreem_args.items():
+                if key == 'RNAstructure' and val:
+                    cmd += ' --RNAstructure_path '+self.config['path_to_RNAstructure']
                 if (not (type(val) == bool)) or val:
                     cmd += ' --'+ key + ' '+ (str(val) if type(val) != bool else '')
 

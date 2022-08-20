@@ -3,23 +3,19 @@
 # your data must be organized this way:
 #|- /[path_to_data]
 #     |- samples.csv
-#     |- /[your_sample_1]
-#          |- r1.fastq
-#          |- r2.fastq
-#          |- ref.fasta
-#          |- library.csv
-#     |- /[your_sample_2]
-#          |- ...
-#     |- /[your_sample_3]
-#          |- ...
+#     |- library.csv
+#     |- ref.fasta
+#     |- [your_sample_1]_R1_001.fastq.gz
+#     |- [your_sample_1]_R2_001.fastq.gz
+#     |- [your_sample_2]_R1_001.fastq.gz
+#     |- [your_sample_2]_R2_001.fastq.gz
+#     |- [your_sample_3]_R1_001.fastq.gz
+#     |- [your_sample_3]_R2_001.fastq.gz
 #     |- ...
 
-path_to_data: test/resources/
-
-
-# Do you use .fastq or .fastq.gz format?
-fastq_zipped: False  # False: .fastq, True: .fastq.gz 
-
+path_to_data: /Users/ymdt/src/data/Lauren 
+path_to_RNAstructure: /Users/ymdt/src/RNAstructure/exe
+fastq_zipped: False
 
 # The samples that you want to process today
 # ------------------------------------------
@@ -30,27 +26,50 @@ fastq_zipped: False  # False: .fastq, True: .fastq.gz
 # Nota bene: obviously, the name of your data folders must match the sample column of samples.csv
 
 samples:
-  - case_1
-  - case_2
+- 470
+- 471
+- 472
+- 473
+- 474
+- 475
+# - [your_sample_1]
+# - [your_sample_2]
+# - [your_sample_3]
+
 
 # The arguments to pass direcly to DREEM
 # --------------------------------------
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
 
 dreem_args:
-    overwrite: True     # Re-compute the bitvector if it already exists. Takes more time.
-   # RNAstructure_path: /Users/ymdt/src/RNAstructure/exe  # where RNAstructure/exe is located on your computer. Remove if you don't want to run RNAstructure
-    temperature: False  # Use samples.csv col 'temperature_k' as an input for RNAstructure
-    poisson: False     # Run Poisson
+    overwrite: False                # Re-compute the bitvector if it already exists. Takes more time.
+    RNAstructure: False        # True if you want to run RNAstructure with DREEM (then fill-in RNAstructure_path above!!)
+    temperature: False              # Use samples.csv col 'temperature_k' as an input for RNAstructure
+    poisson: True                   # Add Poisson confidence interval
+
 
 # Print more information during run time
 verbose: True
 
+
 # There's a bunch of folders in output/. This option creates a folder such that:
 # /mh_only
-#   |- your_sample_1
-#       |- mh.p
-#   |- your_sample_2
-#       |- mh.p
+#   |- [your_sample_1].p
+#   |- [your_sample_2].p
+#   |- [your_sample_3].p
 #   ...
+
 mut_hist_only_folder: True
+
+## RUN ARGS
+# MODE: can be run_dreem or add_info.
+# run_dreem: run DREEM 
+# add-info: add data to targeted DREEM outputs
+mode: add_info 
+
+# use: uncomment what you want to use
+use:
+- library # Don't use library.csv
+- samples # Don't use samples.csv
+#- rnastructure # Don't add RNAstructure 
+
