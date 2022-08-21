@@ -60,7 +60,7 @@ def read_config(args):
     config['samples'] = [str(s) for s in config['samples']]
     config['path_to_data'] = config['path_to_data']+'/' if config['path_to_data'][-1]!= '/' else config['path_to_data']
     
-    for attr in ['use_samples','use_library','use_rnastructure','run_dreem','add_info']:
+    for attr in ['use_samples','use_library','use_rnastructure','use_poisson','run_dreem','add_info']:
         if not attr in config:
             config[attr]=False
     return config

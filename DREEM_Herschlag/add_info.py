@@ -1,5 +1,5 @@
 import pickle
-import rnastructure
+from dreem_herschlag import rnastructure, poisson
 import pandas as pd
 
 class AddInfo(object):
@@ -33,5 +33,11 @@ class AddInfo(object):
                     deltaG, structure = self.rna.run(s, name, mh.sequence)
                     for val, name in zip([deltaG, structure],['deltaG_min','structure']):
                         setattr(mh, name, val)
+
+                if self.config['use_poisson']:
+                    ci = poisson.compute_conf_interval(mh.cov_bases, mh.mut_bases)
+                    for k,v in ci.items():
+                        setattr(mh,'poisson_'+k,v)
+                    
             pickle.dump(pf, open(path + s +'.p', 'wb'))
         
