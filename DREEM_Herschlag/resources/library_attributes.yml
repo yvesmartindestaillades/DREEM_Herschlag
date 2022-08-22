@@ -4,4 +4,4 @@ optional:
   - flank
   - ROI_start  # 0-indexed
   - ROI_stop   # 0-index
-  - sub-library
+  - sub-library # Sub-library of your construct
