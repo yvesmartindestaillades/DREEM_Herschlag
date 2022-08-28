@@ -23,10 +23,11 @@ from dreem_herschlag.util import get_random_string
 @optgroup.group("main arguments")
 @optgroup.option("-c", "--config", type=click.Path(exists=True),
                  help="reference sequences in fasta format")
+@optgroup.option("-r", "--rouskin", is_flag=True,
+                 help="Use Rouskin lab templates")
 @optgroup.option("--samples_info", is_flag=True, help="Print the mandatory and optional columns for samples.csv")
 @optgroup.option("--library_info", is_flag=True, help="Print the mandatory and optional columns for library.csv")
 @optgroup.option("--generate_templates", default=None, help="Path to generate templates for samples.csv (in_vivo and in_vitro) and library.csv")
-
 
 
 
@@ -59,6 +60,7 @@ def read_config(args):
     config['temp_folder'] = 'temp/'
     config['samples'] = [str(s) for s in config['samples']]
     config['path_to_data'] = config['path_to_data']+'/' if config['path_to_data'][-1]!= '/' else config['path_to_data']
+    
     
     for attr in ['use_samples','use_library','use_rnastructure','use_poisson','run_dreem','add_info']:
         if not attr in config:
