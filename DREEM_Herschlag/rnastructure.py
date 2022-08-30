@@ -1,11 +1,6 @@
 
-from codecs import ignore_errors
 import os
-from dreem import parameters, bit_vector, util
-import pandas as pd
-import numpy as np
-from subprocess import PIPE
-import pickle
+from dreem_herschlag import util
                 
 class RNAstructure(object): #TODO
     def __init__(self, config) -> None:
