@@ -10,7 +10,7 @@ mandatory:
     - DMS_conc_mM # Concentration of DMS in mM
 
   in_vitro:
-    - Buffer  # Exact buffer including Mg, eg 300mM Sodium Cacodylate , 3mM Mg
+    - buffer  # Exact buffer including Mg, eg 300mM Sodium Cacodylate , 3mM Mg
 
   in_vivo:
     - cell_line # Cell line
