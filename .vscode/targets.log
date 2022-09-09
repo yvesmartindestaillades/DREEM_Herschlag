@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Thu Sep  1 12:45:31 2022
+# Make data base, printed on Thu Sep  8 19:52:38 2022
 
 # Variables
 
@@ -21,7 +21,7 @@ make: *** No rule to make target `all'.  Stop.
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
-PLATFORMIO_IDE = 2.5.2
+PLATFORMIO_IDE = 2.5.4
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -37,7 +37,7 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 2)
-VERSION := 242c2c3-dirty
+VERSION := 50d9f89-dirty
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
@@ -50,8 +50,6 @@ NO_PROXY = 127.0.0.1
 LSCOLORS = gafacadabaegedabagacad
 # makefile (from `Makefile', line 1)
 DOCKER_IMAGE := ydmt/dreem_herschlag
-# environment
-LaunchInstanceID = 95EBF3E8-542D-4576-8EB8-C1DA4EFA7E21
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -75,7 +73,7 @@ HOME = /Users/ymdt
 # default
 MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/ymdt/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
+VSCODE_CODE_CACHE_PATH = /Users/ymdt/Library/Application Support/Code/CachedData/784b0177c56c607789f9638da7b6bf3230d47a8c
 # environment
 LOGNAME = ymdt
 # environment
@@ -115,7 +113,7 @@ TMPDIR = /var/folders/00/r1kkxj7d0k344frrqtzrc5000000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/ymdt/Library/Application Support/Code/1.70.2-main.sock
+VSCODE_IPC_HOOK = /Users/ymdt/Library/Application Support/Code/1.71.0-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -125,7 +123,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.7205296.7205302
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.7961641.7961647
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -146,8 +144,6 @@ MAKEFILES :=
 PLATFORMIO_CALLER = vscode
 # environment
 LC_ALL = C
-# environment
-SECURITYSESSIONID = 186b2
 # automatic
 ^F = $(notdir $^)
 # default
@@ -161,9 +157,9 @@ CLICOLOR = 1
 # environment
 LANG = C
 # environment
-VSCODE_PID = 581
+VSCODE_PID = 55855
 # variable set hash-table stats:
-# Load=74/1024=7%, Rehash=0, Collisions=3/100=3%
+# Load=72/1024=7%, Rehash=0, Collisions=3/98=3%
 
 # Pattern-specific Variable Values
 
@@ -208,7 +204,7 @@ upgrade-dependencies:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-15 00:36:40
+#  Last modified 2022-08-14 15:36:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -270,6 +266,6 @@ push_to_pypi:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Sep  1 12:45:31 2022
+# Finished Make data base on Thu Sep  8 19:52:38 2022
 
  

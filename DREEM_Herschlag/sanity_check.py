@@ -75,12 +75,12 @@ class Sanity_check(object):
                 assert df[df['sample']==s][mand].isnull().sum() == 0, f"{mand} is empty in samples.csv for sample {s}"
             
         # Drop unauthorised columns
-        for col in list(df.columns):
-            if col not in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env] \
-                + sample_attributes['optional']['all'] + sample_attributes['optional'][exp_env]:
-                if col in sample_attributes['optional']: 
-                    if self.verbose: print(f"Ignored {col}, not in sample_attributes")
-                    df = df.drop(columns=col)
+        # for col in list(df.columns):
+        #    if col not in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env] \
+        #        + sample_attributes['optional']['all'] + sample_attributes['optional'][exp_env]:
+        #        if col in sample_attributes['optional']: 
+        #            if self.verbose: print(f"Ignored {col}, not in sample_attributes")
+        #            df = df.drop(columns=col)
 
         df.to_csv(self.config['temp_folder']+'/samples.csv', index=False)
         if self.verbose: print('Checking samples.csv done\n')
@@ -102,12 +102,14 @@ class Sanity_check(object):
             
         
         # check that every column of libraries.csv is in resources/library_attributes.yml
-        for col in list(df.columns):
-            if col not in library_attributes['mandatory'] + library_attributes['optional']:
-                if self.verbose: print(f"Ignored {col}, not in library_attributes")
-                df = df.drop(columns=col)
+       # for col in list(df.columns):
+       #     if col not in library_attributes['mandatory'] + library_attributes['optional']:
+       #         if self.verbose: print(f"Ignored {col}, not in library_attributes")
+       #         df = df.drop(columns=col)
+       
         if not os.path.exists( self.config['temp_folder']):
             os.makedirs( self.config['temp_folder'])
+       
         df.to_csv(f"{self.config['temp_folder']}/library.csv", index=False)
 
         if self.verbose: print(f"Checking library.csv done\n")

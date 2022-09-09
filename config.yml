@@ -13,7 +13,7 @@
 #     |- [your_sample_3]_R2_001.fastq.gz
 #     |- ...
 
-path_to_data: /Users/ymdt/src/data/Lauren 
+path_to_data: /Users/ymdt/src/data/Jordan 
 path_to_RNAstructure: /Users/ymdt/src/RNAstructure/exe
 fastq_zipped: False
 
@@ -26,18 +26,28 @@ fastq_zipped: False
 # Nota bene: obviously, the name of your data folders must match the sample column of samples.csv
 
 samples:
-- 470
-- 471
-- 472
-- 473
-- 474
-- 475
+- JC0
+- JC1
+- JC5
+- JC100
 # - [your_sample_1]
 # - [your_sample_2]
 # - [your_sample_3]
 
+## RUN ARGS
+# MODE: can be run_dreem or add_info.
+# run_dreem: run DREEM 
+# add_info: add data to targeted DREEM outputs
+mode: add_info 
 
-# The arguments to pass direcly to DREEM
+# ADD_INFO MODE: uncomment what you want to use
+use_with_mode_add_info:
+#- library # Add the content of library.csv
+- samples # Add the content of samples.csv 
+- rnastructure # Add RNAstructure
+- poisson 
+
+# DREEM MODE: the arguments to pass direcly to DREEM
 # --------------------------------------
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
 
@@ -61,16 +71,3 @@ verbose: True
 #   ...
 
 mut_hist_only_folder: True
-
-## RUN ARGS
-# MODE: can be run_dreem or add_info.
-# run_dreem: run DREEM 
-# add_info: add data to targeted DREEM outputs
-mode: add_info 
-
-# USE: uncomment what you want to use
-use_with_mode_add_info:
-#- library # Add the content of library.csv
-#- samples # Add the content of samples.csv 
-#- rnastructure # Add RNAstructure
-- poisson 
