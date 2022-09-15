@@ -43,8 +43,8 @@ mode: add_info
 # ADD_INFO MODE: uncomment what you want to use
 use_with_mode_add_info:
 #- library # Add the content of library.csv
-- samples # Add the content of samples.csv 
-- rnastructure # Add RNAstructure
+#- samples # Add the content of samples.csv 
+#- rnastructure # Add RNAstructure
 - poisson 
 
 # DREEM MODE: the arguments to pass direcly to DREEM
