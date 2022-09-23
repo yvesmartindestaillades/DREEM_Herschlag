@@ -8,9 +8,10 @@ from dreem_herschlag.util import Path, run_command
 class Sanity_check(object):
     def __init__(self, config) -> None:
         self.samples = config['samples']
-        self.path_to_data = config['path_to_data'] if config['path_to_data'][-1] == '/' else config['path_to_data'] + '/'
-        self.sample_file = self.path_to_data+'samples.csv'
-        self.library_file = self.path_to_data+'library.csv'
+        self.path_to_fastq_files = config['path_to_fastq_files']
+        self.path_to_dreem_output_files = config['path_to_dreem_output_files']
+        self.sample_file = self.path_to_fastq_files+'samples.csv'
+        self.library_file = self.path_to_fastq_files+'library.csv'
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
         self.fastq_zipped = config['fastq_zipped']
@@ -24,10 +25,10 @@ class Sanity_check(object):
             print('Found fasta_file '+fasta)
             for s in self.samples:
                 for f in [x + '.gz' if self.fastq_zipped else x for x in ['_R1_001.fastq', '_R2_001.fastq']]:
-                    assert os.path.exists(self.path_to_data+s+f), f"{self.path_to_data+s+f} not found"
-        if self.config['add_info']:
+                    assert os.path.exists(self.path_to_fastq_files+s+f), f"{self.path_to_fastq_files+s+f} not found"
+        if self.config['add_info'] and not self.config['run_dreem']:
             for s in self.samples:
-                assert os.path.exists(self.path_to_data+s+'.p'), f"{self.path_to_data+s+'.p'} not found"
+                assert os.path.exists(self.path_to_dreem_output_files+s+'.p'), f"{self.path_to_dreem_output_files+s+'.p'} not found"
         if self.config['use_library']:
             assert os.path.exists(self.library_file), f"{self.library_file} not found"        
         if self.config['use_samples']:
@@ -35,7 +36,7 @@ class Sanity_check(object):
 
 
     def find_fasta(self):
-        cmd = 'find '+self.path_to_data+' -name "*.fasta" -type f'
+        cmd = 'find '+self.path_to_fastq_files+' -name "*.fasta" -type f'
         output, error_msg = run_command(cmd)
         if error_msg:
             print(error_msg)
@@ -52,8 +53,7 @@ class Sanity_check(object):
 
         # check that every sample as a corresponding line of samples.csv
         df['sample'] = df['sample'].astype(str)
-        print(df['sample'])
-        print(self.samples)
+
         for s in self.samples:
             assert s in list(df['sample']), f"{s, type(s)} doesn't have a corresponding line in samples.csv"
 
@@ -66,6 +66,7 @@ class Sanity_check(object):
         # check that every column of samples.csv is in sample_attributes.yml
         assert exp_env in ['in_vivo','in_vitro'], f"{exp_env} is not a valid value for exp_env. Should be in_vivo or in_vitro"
         # Check that you have all mandatory columns
+        
         for mand in sample_attributes['mandatory']['all'] + sample_attributes['mandatory'][exp_env]:
             assert mand in list(df.columns), f"{mand} is not in samples.csv"
         

@@ -108,7 +108,7 @@ transfered mh.p to mh_only/case_1
 Your fasta/fastq files organization should look like this:
 
 ```
-|- /[path_to_data]
+|- /[path_to_fastq_files]
      |- samples.csv
      |- library.csv
      |- [some name].fasta

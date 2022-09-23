@@ -17,7 +17,7 @@ from dreem_herschlag.templates import TemplateGenerator
 from dreem_herschlag.generate_mh_only import generate_mh_only_folder
 from dreem_herschlag.add_info import AddInfo
 from dreem_herschlag.util import get_random_string
-
+from dreem_herschlag import export
 
 @click.command()
 @optgroup.group("main arguments")
@@ -43,28 +43,20 @@ def read_config(args):
     with open(args['config'], 'r') as f:
         config = yaml.safe_load(f)
     assert config['samples'], "No samples found in config file"
-    assert config['path_to_data'], "No path_to_data found in config file"
+    assert config['path_to_fastq_files'], "No path_to_fastq_files found in config file"
+    assert config['path_to_dreem_output_files'], "No path_to_dreem_output_files found in config file"
     assert config['dreem_args'], "No dreem_args found in config file"
     assert config['verbose'] != None, "No verbose found in config file"
-    assert config['mut_hist_only_folder'] != None, "No mut_hist_only_folder found in config file"
     assert config['fastq_zipped'] != None, "No fastq_zipped found in config file"
-    if config['mode']=='add_info':
-        if config['use_with_mode_add_info']!=None:
-            for use in config['use_with_mode_add_info']:
-                config['use_'+use] = True
-    if config['mode']=='run_dreem':
-        config['use_samples'] = config['dreem_args']['samples']
-        config['use_library'] = config['dreem_args']['library']
+    if config['add_info']:
+        for name, val in config['add_info_args'].items():
+            config['use_'+name] = val       
     
-    config[config['mode']] = True
     config['temp_folder'] = 'temp/'
     config['samples'] = [str(s) for s in config['samples']]
-    config['path_to_data'] = config['path_to_data']+'/' if config['path_to_data'][-1]!= '/' else config['path_to_data']
-    
-    
-    for attr in ['use_samples','use_library','use_rnastructure','use_poisson','run_dreem','add_info']:
-        if not attr in config:
-            config[attr]=False
+    for path in [k for k in config if k.startswith('path')]:
+        config[path] = config[path]+'/' if config[path][-1]!= '/' else config[path]
+
     return config
 
 def make_dirs():
@@ -88,11 +80,14 @@ def run(args):
         if config['run_dreem']:
             print('Starting running DREEM')
             Run_dreem(config).run()
-            if config['mut_hist_only_folder']:
-                generate_mh_only_folder(config['samples'])
+            generate_mh_only_folder(config)
         if config['add_info']:
             print('Starting add_info')
             AddInfo(config).run()
+        if config['to_JSON']:
+            export.to_json(config)            
+        if config['to_CSV']:
+            export.to_csv(config)
         print('Done!')
 
 if __name__ == "__main__":

@@ -37,6 +37,7 @@ setup(
          'dreem_herschlag/util',
          'dreem_herschlag/template',
          'dreem_herschlag/get_info',
+         'dreem_herschlag/export',
    ],
    include_package_data=True,
    install_requires=requirements, #external packages as dependencies
