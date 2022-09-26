@@ -2,7 +2,7 @@
 
 This repo is a wrapper for [Joe Yesselman's DREEM module](https://github.com/jyesselm/dreem), that implements the DREEM algorithm developed by the Rouskin lab.
 
-The wrapper allows the user to run DREEM on different samples and to add standardized experimental details to DREEM output.
+The wrapper allows the user to run DREEM on different samples and to add standardized experimental details to DREEM output. 
 
 ## Requirements
 
@@ -99,10 +99,11 @@ dreem -fq1 test/resources/case_1/r1.fastq -fq2 test/resources/case_1/r2.fastq -f
 None
 DREEM done
 
-transfered mh.p to mh_only/case_1
 ```
 
 ## Run DREEM
+
+This part will help you run DREEM with ease for multiple samples.
 
 ### Organize your sequencing files
 Your fasta/fastq files organization should look like this:
@@ -121,10 +122,37 @@ Your fasta/fastq files organization should look like this:
      |- ...
 ```
 
+We assume here that all smaples have the same fasta file and the same library. 
+If you want to use different libraries, make several folders and run this module several times.`
+
+### Fill in config.yml
+
+- Download the `template_config.yml` template at the root of this repo, or generate it with ``dreem_herschlag --generate_templates``
+- You may rename your file `my_config.yml` or whatever sounds good to you, so that you don't overwrite it.
+- Open the file and follow the fill-in instructions.
+
+
+### RUN!
+
+```
+dreem_herschlag --config my_config.yml
+```
+
+
+## Add info
+
+This part will help you add additional content to your data:
+
+- a library ``library.csv``, containing per-construct items.
+- a library ``samples.csv``, containing per-sample items.
+- various ``RNAstructure`` predictions, such as different structure and deltaG predictions and base-pairing probability.
+- binomial confidence intervals using the ``Poisson`` distribution confidence interval.
+
+Adding this content can be activated or deactivated in the config file.
+
 ### Write additional experimental information files
 
-To add additional experimental information to DREEM's output, you have to create two different types of files, `samples.csv` and `library.csv`.
-
+To add additional experimental information to DREEM's output, you have to create `samples.csv` and `library.csv` using the terminal.
 
 __*TEMPLATES.CSV*__
 
@@ -163,11 +191,20 @@ Columns description for `library.csv` can be found by typing:
 dreem_herschlag --library_info
 ```
 
-### Fill in config.yml
+### More about RNAstructure predictions
 
-- Download the `template_config.yml` template at the root of this repo, or generate it with ``dreem_herschlag --generate_templates``
-- You may rename your file `my_config.yml` or whatever sounds good to you, so that you don't overwrite it.
-- Open the file and follow the fill-in instructions.
+RNAstructure predicts the following:
+- ``deltaG_min``, i.e the energy of the most thermodynamically stable structure w.r.t Turner's rules.
+- ``structure``, i.e the most thermodynamically stable structure w.r.t Turner's rules.
+
+You can add options in the config file to make addtional predictions:
+- ``dms``, i.e RNAstructure uses the dms signal to predict the structure.  
+- ``temperature``, i.e RNAstructure uses the temperature entered in ``samples.csv`` to predict the structure. 
+- ``roi``, i.e RNAstructure makes predictions for the ROI defined in ``library.csv``.
+
+```
+deltaG, deltaG_DMS, deltaG_DMS_ROI, deltaG_DMS_ROI_T, deltaG_DMS_T, deltaG_ROI, deltaG_ROI_T, deltaG_T, deltaG_ens, deltaG_ens_ROI_ROI, deltaG_ens_ROI_ROI_T,deltaG_ens_T,mut_probability,structure,structure_DMS,structure_DMS_ROI,structure_DMS_ROI_T,structure_DMS_T,structure_ROI,structure_ROI_T,structure_T
+```
 
 ### RUN!
 
@@ -176,5 +213,15 @@ dreem_herschlag --config my_config.yml
 ```
 
 
+## A few cool features
+
+### Export to csv / json
+
+Export your pickle files to a csv or a json format by editing ``to_CSV``  or ``to_JSON`` in the config file.
+
 Thanks for reading. 
 Please contact me at yves@martin.yt for any additional information or to contribute.
+
+### Verbose mode
+
+Set verbose to True to get more informations in your terminal.

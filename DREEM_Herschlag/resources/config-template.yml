@@ -3,14 +3,14 @@
 # DREEM MODE: run DREEM on your samples
 # -------------------------------------
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
-run_dreem: False  # runs the DREEM Python module on your samples
+run_dreem: True  # runs the DREEM Python module on your samples
 dreem_args:
-    overwrite: False      # Re-compute the bitvector if it already exists. Takes more time.
+    overwrite: True      # Re-compute the bitvector if it already exists. Takes more time.
     suffix_cmd: ''      # Add this to the end of DREEM's command line   
 
 # Add info mode: add the uncommented lines to your DREEM outputs files
 # --------------------------------------------------------------------
-add_info: True    # turns this mode one 
+add_info: False    # turns this mode one 
 add_info_args:
     library: True       # Add the content of library.csv
     samples: True       # Add the content of samples.csv 
@@ -23,23 +23,11 @@ rnastructure:
     temperature: False           # Use samples.csv col 'temperature_k' as an input for RNAstructure
     suffix_fold_cmd: ''          # Additional input to add to the RNAstructure 'Fold' command      
     # for using DMS signal as an input in the argument 
+    dms: True                    # Add predictions using DMS
     max_paired_mut_rate: 0.01    # below this value, 0% of the bases are unpaired
     min_unpaired_mut_rate: 0.05  # above this value, 100% of the bases are unpaired
-
-# To JSON: export to JSON the pickle files
-# ----------------------------------------
-to_JSON: True
-path_to_json_files: /Users/ymdt/src/dreem_herschlag/output_json
-
-# To CSV: export to CSV the pickle files
-# --------------------------------------
-to_CSV: True
-path_to_csv_files: /Users/ymdt/src/dreem_herschlag/csv_json
-
-# Print more information during run time
-# --------------------------------------
-verbose: True
-
+    temperature: True            # Add predictions using temperature
+    roi: True                    # Add predictions using the ROI if there's a roi
 
 # Where you store your data
 # -------------------------
@@ -98,3 +86,17 @@ path_to_RNAstructure: /Users/ymdt/src/RNAstructure/exe
 samples:
 - case_1
 - case_2
+
+# To JSON: export to JSON the pickle files
+# ----------------------------------------
+to_JSON: True
+path_to_json_files: /Users/ymdt/src/dreem_herschlag/output_json
+
+# To CSV: export to CSV the pickle files
+# --------------------------------------
+to_CSV: True
+path_to_csv_files: /Users/ymdt/src/dreem_herschlag/output_csv
+
+# Print more information during run time
+# --------------------------------------
+verbose: True
