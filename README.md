@@ -191,7 +191,10 @@ Columns description for `library.csv` can be found by typing:
 dreem_herschlag --library_info
 ```
 
-### More about RNAstructure predictions
+### RNAstructure predictions
+
+[RNAstructure](https://rna.urmc.rochester.edu/RNAstructureWeb/) is a software from Prof. Mathews' lab. 
+It predicts the structure of a RNA molecule and its thermodynamic energy based on Turner rules.
 
 RNAstructure predicts the following:
 - ``deltaG_min``, i.e the energy of the most thermodynamically stable structure w.r.t Turner's rules.
@@ -202,9 +205,31 @@ You can add options in the config file to make addtional predictions:
 - ``temperature``, i.e RNAstructure uses the temperature entered in ``samples.csv`` to predict the structure. 
 - ``roi``, i.e RNAstructure makes predictions for the ROI defined in ``library.csv``.
 
+The corresponding part in the config file is the following:
+
+```
+# RNAstructure options
+# ---------------------
+rnastructure:
+    temperature: False           # Use samples.csv col 'temperature_k' as an input for RNAstructure
+    suffix_fold_cmd: ''          # Additional input to add to the RNAstructure 'Fold' command      
+    # for using DMS signal as an input in the argument 
+    dms: True                    # Add predictions using DMS
+    max_paired_mut_rate: 0.01    # below this value, 0% of the bases are unpaired
+    min_unpaired_mut_rate: 0.05  # above this value, 100% of the bases are unpaired
+    temperature: True            # Add predictions using temperature
+    roi: True                    # Add predictions using the ROI if there's a roi
+```
+
+Output attributes are the following:
+
 ```
 deltaG, deltaG_DMS, deltaG_DMS_ROI, deltaG_DMS_ROI_T, deltaG_DMS_T, deltaG_ROI, deltaG_ROI_T, deltaG_T, deltaG_ens, deltaG_ens_ROI_ROI, deltaG_ens_ROI_ROI_T,deltaG_ens_T,mut_probability,structure,structure_DMS,structure_DMS_ROI,structure_DMS_ROI_T,structure_DMS_T,structure_ROI,structure_ROI_T,structure_T
 ```
+
+### Poisson confidence intervals
+
+To get a confidence interval for each mutation rate of the population average, 
 
 ### RUN!
 
@@ -225,3 +250,13 @@ Please contact me at yves@martin.yt for any additional information or to contrib
 ### Verbose mode
 
 Set verbose to True to get more informations in your terminal.
+
+
+## Add RNAstructure predictions and Poisson confidence intervals
+
+### RNAstructure predictions
+
+
+
+
+
