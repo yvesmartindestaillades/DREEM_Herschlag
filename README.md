@@ -229,7 +229,13 @@ deltaG, deltaG_DMS, deltaG_DMS_ROI, deltaG_DMS_ROI_T, deltaG_DMS_T, deltaG_ROI, 
 
 ### Poisson confidence intervals
 
-To get a confidence interval for each mutation rate of the population average, 
+We want to get a confidence interval for each mutation rate of the population average.
+For each residue of a sequence, we model the probability of mutation by a binomial law. 
+We approximate this binomial law by a Poisson distribution ([Montgomery, 2001](https://www.statisticshowto.com/binomial-confidence-interval/)), and we use Poisson's confidence interval to compute a confidence interval for each residue of our population average.
+
+The formula is the following:
+
+CI = $\[ \]$
 
 ### RUN!
 
@@ -250,11 +256,6 @@ Please contact me at yves@martin.yt for any additional information or to contrib
 ### Verbose mode
 
 Set verbose to True to get more informations in your terminal.
-
-
-## Add RNAstructure predictions and Poisson confidence intervals
-
-### RNAstructure predictions
 
 
 
