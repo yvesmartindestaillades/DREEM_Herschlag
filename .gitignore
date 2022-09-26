@@ -55,3 +55,7 @@ __pycache__
 *.tar.gz
 *.tar.bz2
 *.p
+
+output_json
+output_csv
+output_DREEM_mh
