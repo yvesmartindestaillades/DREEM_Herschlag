@@ -235,7 +235,9 @@ We approximate this binomial law by a Poisson distribution ([Montgomery, 2001](h
 
 The formula is the following:
 
-CI = $\[ \]$
+![Poisson confidence interval formula](img/poisson.png)
+
+A fully detailed document is available [here](https://docs.google.com/document/d/1g13esMA0uah9Hsl38r_5fLpSkWI4SrxCnZK4WgvkoCg/edit#heading=h.nxw03wabe0i2)
 
 ### RUN!
 
