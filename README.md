@@ -150,6 +150,19 @@ This part will help you add additional content to your data:
 
 Adding this content can be activated or deactivated in the config file.
 
+Corresponding config file part:
+
+```
+# Add info mode: add the uncommented lines to your DREEM outputs files
+# --------------------------------------------------------------------
+add_info: False    # turns this mode one 
+add_info_args:
+    library: True       # Add the content of library.csv
+    samples: True       # Add the content of samples.csv 
+    rnastructure: True   # Add RNAstructure
+    poisson: True       # Add Poisson confidence interval
+```
+
 ### Write additional experimental information files
 
 To add additional experimental information to DREEM's output, you have to create `samples.csv` and `library.csv` using the terminal.
@@ -230,6 +243,8 @@ deltaG, deltaG_DMS, deltaG_DMS_ROI, deltaG_DMS_ROI_T, deltaG_DMS_T, deltaG_ROI, 
 ### Poisson confidence intervals
 
 We want to get a confidence interval for each mutation rate of the population average.
+
+This option can be activated in the config file, `add_info_args/poisson: True`.
 
 **Method:**
 
