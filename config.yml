@@ -3,7 +3,7 @@
 # DREEM MODE: run DREEM on your samples
 # -------------------------------------
 # More information about hese arguments here: https://github.com/jyesselm/dreem#run
-run_dreem: True  # runs the DREEM Python module on your samples
+run_dreem: False  # runs the DREEM Python module on your samples
 dreem_args:
     overwrite: True      # Re-compute the bitvector if it already exists. Takes more time.
     suffix_cmd: ''      # Add this to the end of DREEM's command line   
@@ -12,7 +12,7 @@ dreem_args:
 # --------------------------------------------------------------------
 add_info: True    # turns this mode one 
 add_info_args:
-    library: True       # Add the content of library.csv
+    library: False       # Add the content of library.csv
     samples: True       # Add the content of samples.csv 
     rnastructure: True   # Add RNAstructure
     poisson: True       # Add Poisson confidence interval
@@ -32,12 +32,12 @@ rnastructure:
 # To JSON: export to JSON the pickle files
 # ----------------------------------------
 to_JSON: True
-path_to_json_files: /Users/ymdt/src/dreem_herschlag/output_json
+path_to_json_files: /Users/ymdt/src/data/Jordan/output_json
 
 # To CSV: export to CSV the pickle files
 # --------------------------------------
 to_CSV: True
-path_to_csv_files: /Users/ymdt/src/dreem_herschlag/output_csv
+path_to_csv_files: /Users/ymdt/src/data/Jordan/output_csv
 
 # Print more information during run time
 # --------------------------------------
@@ -71,7 +71,7 @@ path_to_fastq_files: /Users/ymdt/src/dreem_herschlag/test/resources
 #   |- [your_sample_3].p
 #   ...
 
-path_to_dreem_output_files: /Users/ymdt/src/dreem_herschlag/output_DREEM_mh
+path_to_dreem_output_files: /Users/ymdt/src/data/Jordan
 
 
 # Set to True if your files are under the format .p.gz
@@ -99,5 +99,7 @@ path_to_RNAstructure: /Users/ymdt/src/RNAstructure/exe
 # Nota bene: obviously, the name of your data folders must match the sample column of samples.csv
 
 samples:
-- case_1
-- case_2
+- JC100
+- JC5
+- JC1
+- JC0

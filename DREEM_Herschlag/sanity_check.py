@@ -10,8 +10,8 @@ class Sanity_check(object):
         self.samples = config['samples']
         self.path_to_fastq_files = config['path_to_fastq_files']
         self.path_to_dreem_output_files = config['path_to_dreem_output_files']
-        self.sample_file = self.path_to_fastq_files+'samples.csv'
-        self.library_file = self.path_to_fastq_files+'library.csv'
+        self.sample_file = self.path_to_dreem_output_files+'samples.csv'
+        self.library_file = self.path_to_dreem_output_files+'library.csv'
         self.dreem_args = config['dreem_args']
         self.verbose = config['verbose']
         self.fastq_zipped = config['fastq_zipped']
