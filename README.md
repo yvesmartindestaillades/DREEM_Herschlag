@@ -163,9 +163,9 @@ add_info_args:
     poisson: True       # Add Poisson confidence interval
 ```
 
-### Write additional experimental information files
+### Write additional samples.csv and library.csv
 
-To add additional experimental information to DREEM's output, you have to create `samples.csv` and `library.csv` using the terminal.
+First, you have to create `samples.csv` and `library.csv` using the terminal.
 
 __*TEMPLATES.CSV*__
 
@@ -178,6 +178,7 @@ dreem_herschlag --generate_templates .
 
 __*SAMPLES.CSV*__
 
+Let's fill out samples.csv.
 
 `samples.csv` contains information about each sample as a whole, such as the temperature or the date. 
 Each row of `samples.csv` correspond to a single sample. 
@@ -193,6 +194,7 @@ dreem_herschlag --sample_info
 
 __*LIBRARY.CSV*__
 
+Let's fill out library.csv.
 
 `library.csv` contains information about each construct in a sample.
 There must be one `library.csv` file per sample.
