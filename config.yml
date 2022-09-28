@@ -10,34 +10,33 @@ dreem_args:
 
 # Add info mode: add the uncommented lines to your DREEM outputs files
 # --------------------------------------------------------------------
-add_info: True    # turns this mode one 
+add_info: False    # turns this mode one 
 add_info_args:
     library: False       # Add the content of library.csv
-    samples: True       # Add the content of samples.csv 
-    rnastructure: True   # Add RNAstructure
+    samples: False       # Add the content of samples.csv 
+    rnastructure: False   # Add RNAstructure
     poisson: True       # Add Poisson confidence interval
 
 # RNAstructure options
 # ---------------------
 rnastructure:
-    temperature: False           # Use samples.csv col 'temperature_k' as an input for RNAstructure
     suffix_fold_cmd: ''          # Additional input to add to the RNAstructure 'Fold' command      
     # for using DMS signal as an input in the argument 
     max_paired_mut_rate: 0.01    # below this value, 0% of the bases are unpaired
     min_unpaired_mut_rate: 0.05  # above this value, 100% of the bases are unpaired
     dms: True                    # Add predictions using DMS
-    temperature: True            # Add predictions using temperature
+    temperature: False            # Add predictions using temperature
     roi: True                    # Add predictions using the ROI if there's a roi
 
 # To JSON: export to JSON the pickle files
 # ----------------------------------------
 to_JSON: True
-path_to_json_files: /Users/ymdt/src/data/Jordan/output_json
+path_to_json_files: /Users/ymdt/Downloads  # Path to the JSON files
 
 # To CSV: export to CSV the pickle files
 # --------------------------------------
 to_CSV: True
-path_to_csv_files: /Users/ymdt/src/data/Jordan/output_csv
+path_to_csv_files: /Users/ymdt/Downloads  # Path to the JSON files
 
 # Print more information during run time
 # --------------------------------------
@@ -71,7 +70,7 @@ path_to_fastq_files: /Users/ymdt/src/dreem_herschlag/test/resources
 #   |- [your_sample_3].p
 #   ...
 
-path_to_dreem_output_files: /Users/ymdt/src/data/Jordan
+path_to_dreem_output_files: /Users/ymdt/Downloads
 
 
 # Set to True if your files are under the format .p.gz
@@ -99,7 +98,4 @@ path_to_RNAstructure: /Users/ymdt/src/RNAstructure/exe
 # Nota bene: obviously, the name of your data folders must match the sample column of samples.csv
 
 samples:
-- JC100
-- JC5
-- JC1
-- JC0
+- mutation_histos

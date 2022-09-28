@@ -48,10 +48,9 @@ def read_config(args):
     assert config['dreem_args'], "No dreem_args found in config file"
     assert config['verbose'] != None, "No verbose found in config file"
     assert config['fastq_zipped'] != None, "No fastq_zipped found in config file"
-    if config['add_info']:
-        for name, val in config['add_info_args'].items():
-            config['use_'+name] = val       
-    
+    for name, val in config['add_info_args'].items():
+        config['use_'+name] = val if config['add_info'] else False      
+
     config['temp_folder'] = 'temp/'
     config['samples'] = [str(s) for s in config['samples']]
     for path in [k for k in config if k.startswith('path')]:

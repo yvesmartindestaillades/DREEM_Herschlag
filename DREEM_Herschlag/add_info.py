@@ -1,6 +1,7 @@
 import pickle
 from dreem_herschlag import rnastructure, poisson, export
 import pandas as pd
+from tqdm.auto import tqdm
 
 class AddInfo(object):
     def __init__(self, config) -> None:
@@ -16,7 +17,7 @@ class AddInfo(object):
         for s in self.samples:
             path = self.config['path_to_dreem_output_files']
             pf = pickle.load(open(path + s +'.p', 'rb'))
-            for name, mh in pf.items():
+            for name, mh in tqdm(pf.items(), total= len(pf), unit='construct', colour='green', postfix= 'sample:'+str(s)):
                 if self.config['use_samples']:
                     df_samp['sample'] = df_samp['sample'].astype(str)
                     for col in df_samp.drop(columns=['sample']).columns:

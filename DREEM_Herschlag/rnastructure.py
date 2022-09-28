@@ -58,9 +58,9 @@ class RNAstructure(object): #TODO
         return deltaG, structure
 
     def generate_normalized_mut_rates(self,temp_prefix, info_bases, mut_bases):
-        mut_rates = mut_bases/info_bases 
+        mut_rates = np.array(mut_bases)/np.array(info_bases) 
         mut_rates = [max(r,self.config['rnastructure']['max_paired_mut_rate']) - self.config['rnastructure']['max_paired_mut_rate'] for r in mut_rates]     
-        mut_rates = [min(r,self.config['rnastructure']['min_unpaired_mut_rate']) for r in mut_rates]     
+        mut_rates = np.array([min(r,self.config['rnastructure']['min_unpaired_mut_rate']) for r in mut_rates])  
         pd.DataFrame((mut_rates)/(max(mut_rates)-min(mut_rates)),index=list(range(1,1+len(mut_rates))))\
                     .to_csv(temp_prefix+'_DMS_signal.txt', header=False)
 
@@ -114,7 +114,7 @@ class RNAstructure(object): #TODO
         out = {}
         temp_folder = self.make_temp_folder(samp)
         temp_prefix = f"{temp_folder}{mh.name}"
-        self.generate_normalized_mut_rates(temp_prefix, mh.info_bases[:1], mh.mut_bases[1:])
+        self.generate_normalized_mut_rates(temp_prefix, mh.info_bases[1:], mh.mut_bases[1:])
         for temperature, temperature_suf in {False:'', True:'_T'}.items():
             if temperature and not self.config['rnastructure']['temperature']:
                 continue
