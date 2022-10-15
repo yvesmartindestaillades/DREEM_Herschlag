@@ -272,14 +272,14 @@ dreem_herschlag --config my_config.yml
 
 Export your pickle files to a csv or a json format by editing ``to_CSV``  or ``to_JSON`` in the config file.
 
-Thanks for reading. 
-Please contact me at yves@martin.yt for any additional information or to contribute.
 
 ### Verbose mode
 
 Set verbose to True to get more informations in your terminal.
 
 
+Thanks for reading. 
+Please contact me at yves@martin.yt for any additional information or to contribute.
 
 
 
