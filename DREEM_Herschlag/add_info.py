@@ -2,6 +2,7 @@ import pickle
 from dreem_herschlag import rnastructure, poisson, export
 import pandas as pd
 from tqdm.auto import tqdm
+import numpy as np
 
 class AddInfo(object):
     def __init__(self, config) -> None:
