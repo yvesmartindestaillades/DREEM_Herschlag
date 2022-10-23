@@ -1,6 +1,7 @@
 from dreem_herschlag.get_info import get_attributes
 from dreem_herschlag.util import Path
 import os
+import itertools
 
 class TemplateGenerator(object):
     def __init__(self, path):
@@ -31,7 +32,7 @@ class TemplateGenerator(object):
 
     def generate_template_library(self):
         attributes = get_attributes('library.csv','yml')
-        all_cols = attributes['mandatory']+attributes['optional']
+        all_cols = attributes['mandatory']['all'] + attributes['optional']['all']
         self._write_cols_to_csv(f"{self.path}template_library.csv",all_cols)
         print(f"{self.path}template_library.csv")    
 

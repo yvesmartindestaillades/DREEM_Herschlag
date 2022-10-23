@@ -14,3 +14,13 @@ mandatory:
 
   in_vivo:
     - cell_line # Cell line
+
+optional:
+  all:
+    - option1 # Option 1
+    - option2 # Option 2
+
+  in_vitro:
+
+  in_vivo:
+
